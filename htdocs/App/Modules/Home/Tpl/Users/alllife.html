@@ -1,0 +1,27 @@
+﻿<include file="Public:header" />
+	<link rel='stylesheet' href='__APP__/Public/js/kindeditor/themes/default/default.css' type='text/css' >
+	<script type="text/javascript" src="__APP__/Public/js/kindeditor/kindeditor-min.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/kindeditor/zh_CN.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/kindeditor_functions.js"></script>
+    <div class="container">
+        <div class="main">
+            <div class="alllife">
+            	<form id="form1" action="/Users/doAlllife" method="post">
+            	
+                <center>
+                    <h2>{$Think.lang.alllife}</h2>
+                </center>
+                <br />
+                <input type="hidden" name="uid" value="{$uid}" />
+                <input type="hidden" name="id" value="{$alllife.id}" />
+                <textarea id='content' name="content" style=" border: 1px solid #ccc;width: 628px; height: 400px; line-height: 23px" >{$alllife.content}</textarea><br />
+                <br />
+                <center>
+                    <a href="javascript:void(0);" onclick="doEditorFormSubmit();" class="contactbtn">{$Think.lang.save}</a>&nbsp; &nbsp; 
+                	<a href="javascript:goback('/Users/userProfile?uid={$uid}');" class="contactbtn">{$Think.lang.goback}</a>
+                </center>
+            	</form>
+            </div>
+        </div>
+    </div>
+<include file="Public:footer" />

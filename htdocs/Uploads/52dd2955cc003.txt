@@ -1,0 +1,84 @@
+X ALWAYS Y := If X is selected then Y is selected in every valid configuration.
+X MAYBE  Y := If X is selected then Y is selected in at least one but not all valid configurations. 
+X NEVER  Y := If X is selected then Y cannot be selected in any valid configuration.
+
+C ALWAYS Lang
+C ALWAYS EppTest
+C ALWAYS Programming
+C MAYBE Base
+C MAYBE CPP
+C MAYBE Game
+C MAYBE Other
+C MAYBE PHP
+
+EppTest MAYBE C
+EppTest MAYBE Base
+EppTest MAYBE Lang
+EppTest MAYBE CPP
+EppTest MAYBE Game
+EppTest MAYBE Other
+EppTest MAYBE PHP
+EppTest MAYBE Programming
+
+Game ALWAYS EppTest
+Game ALWAYS Other
+Game MAYBE C
+Game MAYBE Base
+Game MAYBE Lang
+Game MAYBE CPP
+Game MAYBE PHP
+Game MAYBE Programming
+
+CPP ALWAYS Lang
+CPP ALWAYS EppTest
+CPP ALWAYS Programming
+CPP MAYBE C
+CPP MAYBE Base
+CPP MAYBE Game
+CPP MAYBE Other
+CPP MAYBE PHP
+
+Programming ALWAYS EppTest
+Programming MAYBE C
+Programming MAYBE Base
+Programming MAYBE Lang
+Programming MAYBE CPP
+Programming MAYBE Game
+Programming MAYBE Other
+Programming MAYBE PHP
+
+Other ALWAYS EppTest
+Other MAYBE C
+Other MAYBE Base
+Other MAYBE Lang
+Other MAYBE CPP
+Other MAYBE Game
+Other MAYBE PHP
+Other MAYBE Programming
+
+Base ALWAYS EppTest
+Base MAYBE C
+Base MAYBE Lang
+Base MAYBE CPP
+Base MAYBE Game
+Base MAYBE Other
+Base MAYBE PHP
+Base MAYBE Programming
+
+Lang ALWAYS EppTest
+Lang ALWAYS Programming
+Lang MAYBE C
+Lang MAYBE Base
+Lang MAYBE CPP
+Lang MAYBE Game
+Lang MAYBE Other
+Lang MAYBE PHP
+
+PHP ALWAYS Lang
+PHP ALWAYS EppTest
+PHP ALWAYS Programming
+PHP MAYBE C
+PHP MAYBE Base
+PHP MAYBE CPP
+PHP MAYBE Game
+PHP MAYBE Other

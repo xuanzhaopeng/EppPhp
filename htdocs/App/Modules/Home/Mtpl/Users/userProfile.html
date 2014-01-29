@@ -1,0 +1,81 @@
+﻿<include file="Public:header" />
+    <div class="wrapper">
+        <div class="main">
+            <center>
+                <a class="contactbtn03" href="/Users/basicUserInfo?uid={$uid}">Informations de base</a>
+                <br />
+                <br />
+                <a class="contactbtn03" href="/Users/genealogy?uid={$uid}">Généalogie</a>
+                <br />
+                <br />
+                <a class="contactbtn03" href="/Users/catchword?uid={$uid}">Citations</a>
+                <br />
+                <br />
+                <a class="contactbtn03" href="/Users/userPicture?uid={$uid}">Mes plus beaux Sourires</a>
+                <br />
+                <br />
+                <a class="contactbtn03" href="/Users/alllife?uid={$uid}">Biographie</a>
+                <br />
+                <br />
+                <a class="contactbtn03" href="/Users/remark?uid={$uid}">Autres Petits Plus</a>
+                <br />
+                <br />
+                <div style="margin-left: -1px; height: 60px">
+                    <input type="button" value="Preview" onclick="preview();" class="contactbuttom" />
+                    <!--
+                    <input type="button" class="contactbuttom" value="Retour" onclick="goback();" /></div>
+                -->
+                	<if condition="$userGroup eq 'agency' ">
+                    	<input type="button" class="contactbuttom" value="Retour" onclick="goback();" />
+            		<else />
+                    	<input type="button" class="contactbuttom" value="Retour" onclick="goback();" />
+            		</if>
+            	</div>
+                <br />
+                
+                
+                <!--<div>
+                    <a class="contactbtn03" href="/Users/tempStorage?uid={$uid}">Enregister sans validation</a><br />
+                    <br />
+                    <a class="contactbtn03" href="/Users/confirmSave?uid={$uid}">Enregister et Valider</a><br />
+                    <br />
+                </div>-->
+                
+                
+                
+                
+                
+                 <if condition="$hasConfirmed eq 0" >
+            		<if condition="$userGroup neq 'visiter'">
+	            		<div  >
+	                		<a class="contactbtn03" href="/Users/tempStorage?uid={$uid}">Enregister sans validation</a><br />
+                    		<br />
+                    		<a class="contactbtn03" href="/Users/confirmSave?uid={$uid}">Enregister et Valider</a><br />
+                    		<br />
+                    	</div>
+	            	</if>
+	        	<else />
+	            	<div  >
+						<a class="contactbtn03" href="/Users/confirmSave?uid={$uid}">Enregister et Valider</a><br />
+                    	<br />	            
+                 	</div>
+           		</if>
+                
+            </center>
+        </div>
+    </div>
+    <script>
+    function preview() {
+        location.href = "/Users/preview?uid={$uid}";
+    }
+    function goback() {
+        var group = '{$userGroup}';
+        if (group == 'common') {
+            location.href = "/Users/index";
+        } else {
+            location.href = '/Agency/index';
+        }
+
+    }
+</script>
+<include file="Public:footer" />

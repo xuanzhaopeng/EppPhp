@@ -1,0 +1,99 @@
+ <table class="agencyInfoTable">
+     <tr id='1'>
+         <td class="tar">
+             {$Think.lang.agency_name}: &nbsp;&nbsp;
+         </td>
+         <td>
+             <input type="text" name='name' class="input033" value="{$agency.name}"/>
+         </td>
+     </tr>
+     
+     <tr>
+         <td class="tar">
+             {$Think.lang.email}: &nbsp;&nbsp;
+         </td>
+         <td>
+         	<if condition="$optType eq 'edit'" >
+             	<input type="text" name='email' class="input033" value="{$agency.email}" readonly="readonly"/>
+         	<else />
+         		<input type="text" name='email' class="input033" value="{$agency.email}"/>
+         	</if>
+         </td>
+     </tr>
+     
+     <tr>
+         <td class="tar">
+             {$Think.lang.road_name}: &nbsp;&nbsp;
+         </td>
+         <td>
+             <input type="text" name='roadname' class="input033" value="{$agency.road_name}"/>
+         </td>
+     </tr>
+     <tr>
+         <td class="tar">
+             {$Think.lang.city}: &nbsp;&nbsp;
+         </td>
+         <td>
+             <input type="text" name='city' class="input033" value="{$agency.city}"/>
+         </td>
+     </tr>
+     <tr>
+         <td class="tar">
+             {$Think.lang.postcode}: &nbsp;&nbsp;
+         </td>
+         <td>
+             <input type="text" name='postcode' class="input033" value="{$agency.postcode}"/>
+         </td>
+     </tr>
+     
+     <tr>
+         <td class="tar">
+             {$Think.lang.phone}: &nbsp;&nbsp;
+         </td>
+         <td>
+             <input type="text" name='phone'  class="input033" value="{$agency.phone}"/>
+         </td>
+     </tr>
+     <tr>
+         <td colspan="2">
+             <h3>{$Think.lang.contact_info}</h3>
+         </td>
+     </tr>
+     <tr>
+         <td class="tar">
+             {$Think.lang.firstname}: &nbsp;&nbsp;
+         </td>
+         <td>
+             <input type="text" name='firstname'  class="input033" value="{$agency.firstname}"/>
+         </td>
+     </tr>
+     <tr>
+         <td class="tar">
+             {$Think.lang.lastname}: &nbsp;&nbsp;
+         </td>
+         <td>
+             <input type="text" name='lastname'  class="input033" value="{$agency.lastname}"/>
+         </td>
+     </tr>
+     <tr>
+         <td class="tar">
+             {$Think.lang.email}: &nbsp;&nbsp;
+         </td>
+         <td>
+             <input type="text" name='contactEmail'  class="input033" value="{$agency.contactEmail}"/>
+         </td>
+     </tr>
+     <tr>
+         <td class="tar">
+             {$Think.lang.phone}: &nbsp;&nbsp;
+         </td>
+         <td>
+             <input type="text" name='contactPhone'  class="input033" value="{$agency.contactPhone}"/>
+         </td>
+     </tr>
+     <tr>
+         <td colspan="2" class="tac">
+             <a  href="javascript:$('#form1').submit();" class="contactbtn">{$Think.lang.send_request}</a>
+         </td>
+     </tr>
+ </table>

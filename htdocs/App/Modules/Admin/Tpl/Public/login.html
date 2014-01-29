@@ -1,0 +1,81 @@
+<include file="Public:header" />
+
+	<div id="container">
+     
+         <div id="box">
+      <div class="block" id="block-login">
+        <h2>Eclipse++ Manage Platform</h2>
+        <div class="content login">
+          <div class="flash">
+            <div id='msgDiv' class="message notice hide">
+              <p><span id='msgSpan'>Paris ECE & UPMC LIB6</span></p>
+            </div>
+          </div>
+          <form action="#" class="form login">
+            <div class="group wat-cf">
+              <div class="left">
+                <label class="label right">Account</label>
+              </div>
+              <div class="right">
+                <input type="text" class="text_field" id="account"/>
+              </div>
+            </div>
+            <div class="group wat-cf">
+              <div class="left">
+                <label class="label right">Password</label>
+              </div>
+              <div class="right">
+                <input type="password" class="text_field" id="password" />
+              </div>
+            </div>
+            
+            <div class="group navform wat-cf">
+              <div class="right">
+                <button id="btnSubmit" class="button" type="button">
+                  <img src="images/icons/key.png" alt="Save" /> Login
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      </div>
+	</div>
+<script>
+$(function(){
+	$('#btnSubmit').click(function(){
+		
+		var account = $('#account').val();
+		account = $.trim(account);
+		if (account == ''){
+			var msg = "{:L('pls_enter_account')}";
+			showMsgBox(msg);
+			return;
+		}
+		var password = $('#password').val();
+		password = $.trim(password);
+		$.post('/Admin/Public/checkLogin',{account:account,password:password},function(data){
+			var obj = $.parseJSON(data);
+			if (obj.status == 1) {
+				location.href = '/Admin/Public/index';
+			} else {
+				showMsgBox(obj.msg);	
+			}
+		});
+	});
+});
+
+function showMsgBox(msg) {
+	$('#msgSpan').html(msg);
+	$('#msgDiv').removeClass('hide');
+}
+
+function hideMsgBox() {
+	$('#msgDiv').hide();
+}
+
+
+</script>
+</body>
+</html>

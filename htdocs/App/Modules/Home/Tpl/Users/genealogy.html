@@ -1,0 +1,287 @@
+﻿<include file="Public:header" />
+    <link rel="stylesheet" href="__APP__/Public/js/tree/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__APP__/Public/js/tree/css/jquery.jOrgChart.css" />
+    <link rel="stylesheet" href="__APP__/Public/js/tree/css/custom.css" />
+    <link href="__APP__/Public/js/tree/css/prettify.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="__APP__/Public/js/tree/prettify.js"></script>
+    <!-- jQuery includes -->
+    <script type="text/javascript" src="__APP__/Public/js/tree/jquery.min.js"></script>
+    <script type="text/javascript" src="__APP__/Public/js/tree/jquery-ui.min.js"></script>
+    <link rel='stylesheet' href='__APP__/Public/css/jquery-ui.css' type='text/css'>
+    <script src="__APP__/Public/js/tree/jquery.jOrgChart.js"></script>
+
+    <div class="container02" style="overflow-x:scroll;">
+        <div class="mainauto" style="text-align:center; height:100%;">
+ 
+            <br />
+            <input class="buttonStyle" id="addNode" type="button" value="{$Think.lang.add}" />
+            <!-- <input id="editNode" type="button" value="{$Think.lang.edit}"/> -->
+            <input class="buttonStyle" id="delNode" type="button" value="{$Think.lang.del_node}" />
+            <input class="buttonStyle" type="button" value="{$Think.lang.goback}" onclick="goback('/Users/userProfile?uid={$encryptid}')" />
+            	
+			<ul id="org" style="display: none"><?php echo($tree);?></ul>      
+            <div id="chart" class="orgChart">
+            </div>
+            <div id="genealogyInfoDialog" style="display: none;">
+                <form id="form1" method="post" >
+                <input name='opt' type='hidden' value="{$opt}" />
+                <input id='chickedNodeId' name='chickedNodeId' type='hidden' />
+                <input id="uid" name="uid" type="hidden" value="{$encryptid}" />
+				<table class="datalist">
+					<tr>
+						<td colspan=2>
+							<h2>Informations générales</h2>
+						</td>
+						<td colspan=2>
+							<h2>Informations sur le conjoint</h2>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{$Think.lang.firstname}:
+						</td>
+						<td>
+							<input id="fname" name="fname" type="text" tabindex="1" />
+						</td>
+						<td>
+							{$Think.lang.firstname}:
+						</td>
+						<td>
+							<input id="confname" name="confname" type="text" tabindex="101" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{$Think.lang.lastname}:
+						</td>
+						<td>
+							<input id="lname" name="lname" type="text" tabindex="2" />
+						</td>
+						<td>
+							{$Think.lang.lastname}:
+						</td>
+						<td>
+							<input id="conlname" name="conlname" type="text" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{$Think.lang.secondname}:
+						</td>
+						<td>
+							<input type="text" class="input02" name='secondname' />
+						</td>
+						<td>
+							{$Think.lang.secondname}:
+						</td>
+						<td>
+							<input type="text" class="input02" name='consecondname' />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{$Think.lang.user_gender}:
+						</td>
+						<td>
+							<select name="gender">
+								<option value="0">{$Think.lang.female}</option>
+								<option value="1" selected='selected'>{$Think.lang.male}</option>
+							</select>
+						</td>
+						<td>
+							{$Think.lang.user_gender}:
+						</td>
+						<td>
+							<select name="congender">
+								<option value="0">{$Think.lang.female}</option>
+								<option value="1" selected='selected'>{$Think.lang.male}</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{$Think.lang.birthday}:
+						</td>
+						<td>
+							<input id='birthday' name='birthday' readonly="readonly" type="text" class='input02' />
+						</td>
+						<td>
+							{$Think.lang.birthday}:
+						</td>
+						<td>
+							<input id='conbirthday' name='conbirthday' readonly="readonly" type="text" class='input02' />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{$Think.lang.deathday}:
+						</td>
+						<td>
+							<input id='deathday' name='deathday' readonly="readonly" type="text" class='input02' />
+						</td>
+						<td>
+							{$Think.lang.deathday}:
+						</td>
+						<td>
+							<input id='condeathday' name='condeathday' readonly="readonly" type="text" class='input02' />
+						</td>
+					</tr>
+					<if condition="count($data) eq 0">
+						<tr>
+							<td>
+								{$Think.lang.user_name_list}:
+							</td>
+							<td>
+								<select id="Select1" name="nodeId">
+									<option value='0' selected>{$Think.lang.empty}</option>
+								</select>
+							</td>
+							<td colspan=2>
+								&nbsp;
+							</td>
+						</tr>
+						<input type='hidden' name='relationship' />
+					<else />
+						<tr>
+							<td>
+								{$Think.lang.user_name_list}:
+							</td>
+							<td>
+								<select id="node" name="nodeId">
+									<foreach name="data" item="v">
+										<option value="{$v.id}">{$v.name}</option>
+									</foreach>
+								</select>
+							</td>
+							<td colspan=2>
+								&nbsp;
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{$Think.lang.relation}
+							</td>
+							<td>
+								<select id="relationship" name="relationship">
+									<option value="0">{$Think.lang.parent}</option>
+									<option value="1" selected="selected">{$Think.lang.children}</option>
+								</select>
+							</td>
+							<td colspan=2>
+								&nbsp;
+							</td>
+						</tr>
+					</if>
+			</table>
+            <input type='hidden' id="avatar" name='avatar' />
+            <br />
+            <input type="submit" value="      {$Think.lang.submit}      " class="contactbuttom" />
+			</form>
+            </div>
+        </div>
+    </div>
+	
+    <script>
+        var chickedNodeId = '';
+        $(function () {
+            $("#org").jOrgChart({
+                chartElement: '#chart',
+                dragAndDrop: false,
+                nodeClickCallback: function (node) {
+                    $('.orgChart div').css('color', 'black');
+                    //$(node).css('color', 'red');
+					var styles = {
+						color : 'red'
+					};
+					//$(node).css(styles);
+					//$(node).children('div').css(styles);
+					
+					$(node).css('color', 'red');
+					length = node.childNodes.length;
+					if( length == 2){
+						for (var i = 0; i < node.childNodes.length; i++) {
+								child = node.childNodes[i];
+								if(child.className == 'female' || child.className == 'male') {
+									$(child).css('color','red');
+								}
+						}
+					}else if( length == 1) {
+						leavesNode = node.childNodes[0];
+						for( var j=0; j< leavesNode.childNodes.length; j++) {
+							childchild = leavesNode.childNodes[j];
+							$(childchild).css('color','red');
+						}
+							
+					}
+                    
+					chickedNodeId = $(node).attr('id');
+                    $('#chickedNodeId').val(chickedNodeId);
+                }
+            });
+
+            $("#addNode").click(function () {
+                showDialog();
+                $('#form1').attr('action', '__URL__/addGenealogy');
+            });
+
+            $('#delNode').click(function () {
+                if (chickedNodeId == '') {
+                    alert('{$Think.lang.pls_select_one}');
+                    return false;
+                }
+                $.post('__URL__/deleteGenealogyChild', { id: chickedNodeId }, function (data) {
+                    var obj = $.parseJSON(data);
+                    if (obj.status == 0) {
+                        alert('{$Think.lang.delete_failed}');
+                    } else if (obj.status == 1) {
+                        //alert('{$Think.lang.delete_success}');
+                        location.href = '/Users/genealogy?uid={$encryptid}&opt={$opt}';
+                    } else if (obj.status == 2) {
+                    	alert('<?php addslashes($Think.lang.can_only_delete_child_node) ?>');
+                    }
+                });
+            });
+
+            $('#editNode').click(function () {
+
+            });
+			
+			
+        });
+
+        function showDialog() {
+            $('#genealogyInfoDialog').dialog({
+                width: 800,
+                height: 420,
+                modal: false,
+                title: "{$Think.lang.genealogy}",
+                create: function () { },
+                open: function () { },
+                close: function () { }
+            });
+        }
+		
+
+        function getGenealogyData(id) {
+            var url = "/Users/getGenealogyInfo";
+            $.post(url, { id: id }, function (data) {
+                var obj = $.parseJSON(data);
+                if (obj.status == 1) {
+                    setField(obj);
+                }
+            });
+        }
+
+        function setField(obj) {
+            if (obj != null) {
+                $('#fname').val(obj.data['firstname']);
+                $('#lname').val(obj.data['lastname']);
+            }
+        }
+
+        function finish() {
+            location.href = "/Users/userProfile?uid={$encryptid}&opt={$opt}";
+        }
+	
+    </script>
+<include file="Public:footer" />

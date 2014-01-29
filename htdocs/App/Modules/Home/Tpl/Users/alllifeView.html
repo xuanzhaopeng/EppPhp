@@ -1,0 +1,44 @@
+﻿<include file="Public:header" />
+
+	<link rel="stylesheet" href="__APP__/Public/css/common.css" />
+	<link rel='stylesheet' href='__APP__/Public/js/kindeditor/themes/default/default.css' type='text/css' >
+	<script type="text/javascript" src="__APP__/Public/js/kindeditor/kindeditor-min.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/kindeditor/zh_CN.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/kindeditor_functions.js"></script>
+    <div class="container">
+        <div class="main">
+			<!--
+			<div>
+				<include file='Share:userViewModify' />
+			</div>
+			-->
+        	<div class="userContainer">
+        		<include file="Share:userViewNavigate" />
+				<br />
+				<include file="Share:userViewIndexHeader" />
+				<br />
+        		<div class="alllife">
+	                <input type="hidden" name="uid" value="{$alllife.uid}" />
+	                <input type="hidden" name="id" value="{$alllife.id}" />
+	                <textarea id='content1' name="content1" style="display:none; border: #ccc; width: 628px; height: 400px; line-height: 23px" readonly="readonly" >{$alllife.content}</textarea><br />
+	                <!-- <div style=" border: 1px solid #ccc; width: 628px; height: 400px; line-height: 23px" >{$alllife.content}</div><br /> -->
+                </div>
+            </div>
+        </div>
+    </div>
+	
+<script>
+$(function(){
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content1"]', {
+			resizeType : 1,
+			allowPreviewEmoticons : false,
+			allowImageUpload : false,
+			allowFlashUpload:false,
+			items : []
+		});
+		editor.readonly(true);
+	});
+});
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,29 @@
+<div style="text-align:center;">
+			<div  style="padding:5px; padding-bottom:0px; background-color:#504E63; text-align:center; margin:0 auto; width:200px;">
+						<if condition="$userInfo.avatar neq ''" >
+							<img src="{$userInfo.avatar}" width="200"  style="margin: 0 auto;" />
+						<else />
+							<img src="__APP__/Public/images/avatar.jpg" width="200"  style="margin:0 auto;" />
+						</if>
+			</div>
+			<br />
+			<div id="sb">
+						<div class="topPanel specialWords tal" style="text-align:center;">
+							<h1 style="font-family: 'PT Sans', sans-serif;font-weight: 200;font-size:40px; margin:0 auto;">
+								{$userInfo.firstname}&nbsp; 
+								{$userInfo.lastname}
+								<if condition="$userInfo.secondname neq '' " >                        
+									, née {$userInfo.secondname}
+								</if>
+							</h1>
+						</div>
+						<div class="specialSmallWords tal">
+							{$userInfo.birthday} - {$userInfo.deathday} 
+						</div>
+						<div class="specialSmallWords tal">
+							{$Think.lang.die_the_age}&nbsp;{$userInfo.age}&nbsp;{$Think.lang.year_of_age}
+						</div>
+			</div>
+    <div class="clear">
+    </div>
+</div>

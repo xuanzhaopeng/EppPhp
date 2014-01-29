@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+     
+    <title>Offrez un Sourire Eternel</title>
+    <link rel="stylesheet" href="../Public/css/common.css" type="text/css" />
+    <link rel="stylesheet" href="../Public/css/public02.css" type="text/css" />
+    <link rel="stylesheet" href="__APP__/Public/js/tree/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__APP__/Public/js/tree/css/jquery.jOrgChart.css"/>
+    <link rel="stylesheet" href="__APP__/Public/js/tree/css/custom.css"/>
+    <link href="__APP__/Public/js/tree/css/prettify.css" type="text/css" rel="stylesheet" />
+ 
+    <script type="text/javascript" src="__APP__/Public/js/tree/prettify.js"></script>
+    
+    <!-- jQuery includes -->
+    <script type="text/javascript" src="__APP__/Public/js/tree/jquery.min.js"></script>
+    <script type="text/javascript" src="__APP__/Public/js/tree/jquery-ui.min.js"></script>
+    <link rel='stylesheet' href='__APP__/Public/css/jquery-ui.css' type='text/css' >
+    
+    <script src="__APP__/Public/js/tree/jquery.jOrgChart.js"></script>
+    <script src="__APP__/Public/js/functions.js"></script>
+    
+ 
+ </head>
+
+ 
+  <body>
+    <!--header开始-->
+    <div id="header">
+    </div>
+    <!--header结束-->
+	   <div class="wrapper">
+			<div class="main">
+				<div class="userContainer" style="margin-left:5px;margin-right:5px;">
+					<include file="Share:userViewIndexHeader" />
+					<ul id="org" style="display: none"><?php echo($tree);?></ul>           
+					<div id="chart" class="orgChart" style="overflow-x:scroll;"></div>
+				</div>
+			</div>
+		</div>
+
+<script>
+	var chickedNodeId = '';
+	$(function() {
+	    $("#org").jOrgChart({
+	        chartElement : '#chart',
+	        dragAndDrop  : true,
+	        nodeClickCallback: function(node){
+	        	$('.orgChart div').css('color', '#fff');
+	        	$(node).css('color', 'red');
+	        	chickedNodeId = $(node).attr('id');
+				$('#chickedNodeId').val(chickedNodeId);
+	        }
+	    });
+	    
+	    $("#addNode").click(function(){
+	    	showDialog();
+	    	$('#form1').attr('action', '__URL__/addGenealogy');
+	    });
+	    
+	    $('#delNode').click(function(){
+	    	if (chickedNodeId == '') {
+	    		alert('{$Think.lang.pls_select_one}');
+	    		return false;
+	    	}
+			$.post('__URL__/deleteGenealogyChild', {id:chickedNodeId}, function(data){
+				var obj = $.parseJSON(data);
+				if (obj.status == 0) {
+					alert('{$Think.lang.delete_failed}');
+				} else if (obj.status == 1) {
+					//alert('{$Think.lang.delete_success}');
+					location.href = '/Users/genealogy?uid={$uid}&opt={$opt}';
+				} else if(obj.status == 2) {
+					alert('{$Think.lang.can_only_delete_child_node}');
+				}
+			});
+	    });
+	    
+	    $('#editNode').click(function(){
+	    	
+	    });
+	});
+	
+	function showDialog() {
+		$('#genealogyInfoDialog').dialog({
+			width: 600,
+            height: 420,
+            modal: false,
+            title: "{$Think.lang.genealogy}",
+            create: function () { },
+            open: function () { },
+            close: function () { }
+		});
+		
+	}
+	
+	function getGenealogyData(id) {
+		var url = "/Users/getGenealogyInfo";
+		$.post(url, {id:id}, function(data){
+			var obj = $.parseJSON(data);
+			if (obj.status == 1) {
+				setField(obj);
+			}
+		});
+	}
+	
+	function setField(obj) {
+		if (obj != null) {
+			$('#fname').val(obj.data['firstname']);
+			$('#lname').val(obj.data['lastname']);
+		}
+	}
+	
+	function finish() {
+		location.href = "/Users/userProfile?uid={$uid}&opt={$opt}";
+	}
+	
+</script>
+
+<if condition="$group neq 'visiter' " >
+	<include file="Share:floatBar"/>
+	<br/>
+</if>
+
+     <include file="Public:footer" />
+    <br/><br/><br/><br/>
+    <div style="position: fixed;  left: 0px; bottom: 0px; ">	
+	<include file="Share:userViewNavigate" />
+	</div>
+</body>
+</html>

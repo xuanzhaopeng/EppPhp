@@ -1,0 +1,52 @@
+<include file='Public:header' />
+<div class="container">
+    <div class="main" style="min-height:600px"  >
+                <div id="wrapper" style="width:700px; margin-top: 50px;" >
+					<!--LOGIN FORM-->
+					<form name="form1" id="form1" style="width:700px;"  class="login-form" action="/Agency/checkAgency" method="post">
+					<!--HEADER-->
+						<div class="loginheader">
+						<!--TITLE--><h1>Espace Agence</h1><!--END TITLE-->
+						</div>
+					<!--END HEADER-->
+	
+					<!--CONTENT-->
+					<div class="content">
+					<table style="margin:0 auto;">
+                    <tr>
+                        <td>
+                           <h2>{$Think.lang.email} : &nbsp;&nbsp;</h2>
+                        </td>
+                        <td>
+                            <input name="email" type="text" class="input username" value="Email" onfocus="this.value=''" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h2 style="margin-top:25px;">{$Think.lang.password} : &nbsp;&nbsp;</h2>
+                        </td>
+                        <td>
+                            <input name="password" type="password" class="input password" value="Password" onfocus="this.value=''"/>
+                        </td>
+                    </tr>
+
+
+					</table>
+					</div>
+					<!--END CONTENT-->
+    
+					<!--FOOTER-->
+					<div class="footer">
+					<!--LOGIN BUTTON--><input type="submit" name="submit" value="Valider >" class="button" /><!--END LOGIN BUTTON-->
+					<!--REGISTER BUTTON--><a href="/Agency/createAgency" class="register">{$Think.lang.has_not_been_registered_agency}</a><!--END REGISTER BUTTON-->
+					</div>
+					<!--END FOOTER-->
+
+					</form>
+					<!--END LOGIN FORM-->
+				</div>		
+        
+
+    </div>
+</div>
+<include file='Public:footer' />

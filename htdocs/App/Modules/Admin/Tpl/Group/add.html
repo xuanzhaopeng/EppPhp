@@ -1,0 +1,159 @@
+<include file="Public:header" />
+<include file="Public:mainNavBar" />
+<include file="Public:sidebar" />
+
+
+<div id="wrapper" class="wat-cf">
+	<div id="main">
+		<div class="block" id="groupForm">
+      <div class="content">
+        <h2 class="title">Import SPL Model</h2>
+        <div class="inner">
+          <form id="form1" action="/Admin/Group/doAdd" method="post" class="form">
+            <input type='hidden' id='groupId' name='groupId'>
+			<input type='hidden' id='modelfile' name='modelfile'>
+			<input type='hidden' id='dependencyfile' name='dependencyfile'>
+            
+            <div class="group">
+				<div class="fieldWithErrors">
+					<label class="label" for="post_title" style="color:black;">Model Name:</label>
+				</div>
+				<input type="text" class="text_field" id='name' name='name'  />
+				<span class="description">Ex: a simple text</span>
+            </div>
+			
+			<div class="group">
+				<div class="fieldWithErrors">
+					<label class="label" for="post_title" style="color:black;">Eclipse Version:</label>
+				</div>
+				<select id="eclipseselect" name="eclipseselect" style="width:315px;height:28px;" ></select>
+            </div>
+
+            <div class="group">
+				<div class="fieldWithErrors">
+					<label class="label" for="post_title" style="color:black;">FeatureIDE Model File:</label>
+				</div>
+					<input id="fakemodel" type="button" value="Upload FeatureIDE Model"/>
+					<label id="upModelText" ></label>
+					<input name="file" type="file"  id='model' name='model' onchange="importModelFile();" style="display:none;"/>
+            </div>
+			
+			<div class="group">
+				<div class="fieldWithErrors">
+					<label class="label" for="post_title" style="color:black;">FeatureIDE Dependency File:</label>
+				</div>
+					<input id="fakedependency" type="button" value="Upload Dependency File"/>
+					<label id="upDependencyText" ></label>
+					<input name="file" type="file" id='dependency' name='dependency' onchange="importDependencyFile();" style="display:none;" />
+            </div>
+
+            <div class="group navform wat-cf">
+				<button class="button" type="submit">
+					<img src="../Public/images/icons/tick.png" alt="Save" /> Save
+				</button>
+				<span class="text_button_padding">or</span>
+				<a class="text_button_padding link_button" href="javascript:cancel();" >Cancel</a>
+            </div>
+      
+            <script>
+			var thumbPrefix = 'logo_w200_w200_';
+			var thumbW = 200;
+			var thumbH = 200;
+
+			</script>
+		  </form>
+        </div>
+      </div>
+	</div>
+	<include file="Public:message" />
+  </div>
+</div>
+
+<script>
+var modelPath = "";
+var dependencyPath = "";
+
+	$(function(){
+		$("#fakemodel").click(function()
+		{
+			$("#model").click();
+		});
+		$("#fakedependency").click(function()
+		{
+			$("#dependency").click();
+		});
+		
+		$.post('/Admin/Spl/loadEclipse',function(data){
+		var obj = $.parseJSON(data);
+		if (obj.status == 1) {
+			var data = obj.data;
+			for(i=0;i<data.length;i++){
+				var repo_url = data[i].repository;
+				
+				var res = data[i].repository.split("/");
+				var repo_name = res[res.length - 1].trim();
+				if(repo_name == null || repo_name.length <=0)
+				{
+					repo_name = res[res.length - 2];
+				}
+				repo_name = repo_name.toUpperCase();
+				if(i == 0){
+					$('#eclipseselect').append('<option value="'+repo_url+'" selected="selected">'+repo_name+'</option>');
+				}else{
+					$('#eclipseselect').append('<option value="'+repo_url+'">'+repo_name+'</option>');
+				}
+			}
+			
+			hideMessage();
+		} else if(obj.status == 2) {
+			$('#eclipseselect').html('');
+			showMessage(obj.msg, 'warning');
+		} else if (obj.status == 0) {
+			showMessage(obj.msg, 'error');
+		}
+	});
+	});
+</script>
+
+<script>	
+function importModelFile() {
+	$.ajaxFileUpload({
+        url: '/Admin/Group/uploadModel',
+        secureuri: false,
+        fileElementId: 'model',
+        type:'json',
+        success: function(data){
+        	var obj = $.parseJSON(data);
+			$('#upModelText').html(obj.filename);
+			modelPath = obj.filename;
+			$('#modelfile').val(modelPath);
+        	if (obj.status == 1) {
+        		showMessage(obj.msg,'notice');
+        	} else if(obj.status == 0) {
+        		showMessage(obj.msg, 'error');
+        	}
+        }
+    });
+}
+
+function importDependencyFile() {
+	$.ajaxFileUpload({
+        url: '/Admin/Group/uploadDependency',
+        secureuri: false,
+        fileElementId: 'dependency',
+        type:'json',
+        success: function(data){
+        	var obj = $.parseJSON(data);
+			$('#upDependencyText').html(obj.filename);
+			dependencyPath = obj.filename;
+			$('#dependencyfile').val(dependencyPath);
+        	if (obj.status == 1) {
+        		showMessage(obj.msg,'notice');
+        	} else if(obj.status == 0) {
+        		showMessage(obj.msg, 'error');
+        	}
+        }
+    });
+}
+</script>
+<include file="Public:footer" />

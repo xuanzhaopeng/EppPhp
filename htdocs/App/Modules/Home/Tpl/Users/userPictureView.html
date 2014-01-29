@@ -1,0 +1,56 @@
+﻿<include file="Public:header" />
+<link rel='stylesheet' href='__APP__/Public/js/lightbox/css/jquery.lightbox-0.5.css' type='text/css' >
+<script type="text/javascript" src="__APP__/Public/js/lightbox/jquery.lightbox-0.5.js"></script>
+
+<style>
+    .picture
+    {
+        display: inline-block;
+        width: 600px;
+    }
+    .picture li
+    {
+        list-style-type: none;
+        width: 350px;
+    }
+	
+</style>
+<div class="container02">
+    <div class="main">
+		<!--
+		<div>
+				<include file='Share:userViewModify' />
+		</div>
+		-->
+    	<div class="userContainer">
+        	<include file="Share:userViewNavigate" />
+			<br />
+                <include file="Share:userViewIndexHeader" />
+                <br />
+        	<div class="piclist">
+               <input id='uid' type='hidden' value='{$uid}' />
+                <div style="clear: both">
+                </div>
+                <br />
+                <div id='J_imageView'>
+                <ul>
+                	<foreach name="pics" item="pic">
+                		<li><div style="width:195px"> <div class="piclistdiv"><a href="{$pic.name}"><img src="{$pic.name}" onload="imgReSize(this,179,179)"  /></a></div></div></li>
+                	</foreach>
+                </ul>
+                </div>
+                <div style="clear: both">
+                </div>
+            </div>	
+        </div>
+                  
+        <div style="clear: both">
+        </div>
+    </div>
+</div>
+<script>
+$(function(){
+	$('#J_imageView a').lightBox();
+});
+</script>
+<include file='Public:footer' />

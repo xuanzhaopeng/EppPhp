@@ -1,0 +1,24 @@
+<div class="preview_confirm_box">
+		<ul class="lavaLamp">
+			<li><a href="/Users/userProfile?uid={$uid}">{$Think.lang.edit}</a></li>
+			<if condition="($group eq 'visiter') or ($group eq 'common') ">
+				<if condition="($paid eq 0) and ($createdby eq 2) ">
+					<li><a href="/Paypal/checkout?uid={$uid}" />{$Think.lang.pay}</a></li>
+				</if>
+				<li><a href="/Public/logout">Logout</a></li>
+			</if>
+			
+			<if condition="($group eq 'agency') and ($confirmed eq 0) ">
+				<li><a href="/Users/confirmSave?uid={$uid}">{$Think.lang.confirm_save}</a> </li>
+				<li><a href="/Users/tempStorage?uid={$uid}">{$Think.lang.just_save}</a> </li>
+				<li><a href="/Users/userProfile?uid={$uid}">{$Think.lang.edit}</a></li>
+			</if>
+			<if condition="$group eq 'agency'">
+				<if condition="$confirmed eq 0">
+					<li><a href="javascript:void(0);" onclick="goback('/Users/userProfile?uid={$uid}');">{$Think.lang.goback}</a></li>
+				<else />
+					<li><a href="javascript:void(0);" onclick="goback('/Users/hasconfirmedUserList');">{$Think.lang.goback}</a></li>
+				</if>
+			</if>
+		</ul>
+</div>

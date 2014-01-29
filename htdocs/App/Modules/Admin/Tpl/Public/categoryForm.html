@@ -1,0 +1,141 @@
+<div class="block div_hide" id="categoryForm">
+      <div class="content">
+        <h2 class="title">Category Features</h2>
+        <div class="inner">  
+            <div class="group">
+              <div class="fieldWithErrors">
+				<label><input id="selectedFeature" type="checkbox" class="checkbox toggle" value=''/> Just show selected features</label>
+              </div>
+              <table id="diadataTable" class="table">
+                    <tr>
+                      <th class="first">id</th>
+                      <th>version</th>
+                      <th>name</th>
+                      <th>publisher</th>
+                    </tr>
+                    <tbody id='dialistBody'>
+                    
+                    </tbody>
+              </table>
+              <div id="diapagination" class="pagination"></div></br>
+            </div>
+
+            <script>
+        			var thumbPrefix = 'logo_w200_w200_';
+        			var thumbW = 200;
+        			var thumbH = 200;
+			</script>
+
+         </div>
+      </div>
+      
+</div>
+<script type="text/javascript">
+var categoryName = "";
+$(function(){
+	$('#selectedFeature').removeAttr('checked');
+	$('#selectedFeature').click(function(){
+		if($("#selectedFeature").is(':checked')){
+			dia_loadPageSelectedFeatures(1);
+			
+		}else{
+			dia_loadPage(1);
+		}
+	});
+	
+});
+
+function dia_loadPageSelectedFeatures(pageIndex) {
+	currPageIndex = pageIndex;
+	//load data
+	$.post('/Admin/Feature/loadDistinctFeatureByCategoryPage',{p:pageIndex,name:categoryName},function(data){
+		var obj = $.parseJSON(data);
+		if (obj.status == 1) {
+			dia_loadData(obj);
+		} else if(obj.status == 2) {
+			$('#dialistBody').html('');
+		} else if (obj.status == 0) {
+		}
+	});
+}
+
+function dia_loadPage(pageIndex) {
+	currPageIndex = pageIndex;
+	//load data
+	$.post('/Admin/Feature/loadFeatureByCategoryPage',{p:pageIndex,name:categoryName},function(data){
+		var obj = $.parseJSON(data);
+		if (obj.status == 1) {
+			dia_loadData(obj);
+		} else if(obj.status == 2) {
+			$('#dialistBody').html('');
+		} else if (obj.status == 0) {
+		}
+	});
+}
+
+function dia_loadData(obj) {
+	var data = obj.data;
+	var html = '';
+	
+	//biuld pagination
+	var pagination = '';
+	var page = obj.page;
+	var nowPage = parseInt(page.nowPage);
+	var prevPage = nowPage - 1;
+	totalPages = page.totalPages;
+	var startNumber = (nowPage - 1)*15; 
+	
+	if (data != null) {
+	
+	for(i=0; i<data.length; i++) {
+      html = html + '<tr><td>'+data[i].id+'</td>';
+      html = html + '<td>'+data[i].version+'</td>';
+	  html = html + '<td>'+data[i].name+'</td>';
+      html = html + '<td>'+data[i].publisher+'</td></tr>';  
+	}
+	$('#dialistBody').html(html);
+	
+	
+	if (prevPage > 0) {
+		pagination = '<span class="disabled prev_page" style="cursor:pointer;" onclick="javascript:dia_loadPage('+prevPage+');">« Prev</span>';	
+	} else {
+		pagination = '<span class="disabled prev_page">« Prev</span>';
+	}
+	
+	for (i=1; i<= page.totalPages; i++) {
+		if (i == nowPage) {
+			pagination = pagination + '<span class="current">'+i+'</span>';
+		} else {
+			pagination = pagination + '<a href="javascript:dia_loadPage('+i+');">'+i+'</a>';					
+		}
+	}
+	var nextPage = nowPage + 1;
+	if (nextPage > page.totalPages) {
+		pagination = pagination + '<span class="next_page">Next »</span>';	
+	} else {
+		pagination = pagination + '<span class="next_page" style="cursor:pointer;" onclick="javascript:dia_loadPage('+nextPage+');">Next »</a></span>';
+	}
+	
+	$('#diapagination').html(pagination);
+	}
+}
+
+function cancel() {
+	$("#categoryForm").dialog("close");
+}
+
+function openEditDialog(cName) {
+  $('#categoryForm').dialog({
+		width: 800,
+           height: 620,
+           modal: true,
+           title: 'Edit',
+           create: function () { },
+           open: function () { },
+           close: function () { }
+	});
+	categoryName = cName;
+	dia_loadPage(1);
+}
+
+</script>        

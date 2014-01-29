@@ -1,0 +1,38 @@
+  <div class="inner div_hide" id="block-messages">
+    <div class="flash">
+      <div class="message error">
+        <span><p>Error message</p></span>
+      </div>
+      <div class="message warning">
+        <span><p>Warning message</p></span>
+      </div>
+      <div class="message notice">
+        <span><p>Notice message</p></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  /**
+  * type: notice, warning, error
+  */
+  function showMessage(content, type) {
+  	$('#block-messages').show();
+  	
+  	$('#block-messages p').each(function(){
+  		$(this).html(content);
+  	});
+  	
+  	$('.message').each(function(){
+  		if(!$(this).hasClass(type)) {
+ 			$(this).addClass('div_hide');
+  		}
+  	});
+  }
+  
+  function hideMessage() {
+	$('#block-messages').hide();
+  }
+  
+  
+  </script>

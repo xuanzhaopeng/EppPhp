@@ -1,0 +1,61 @@
+<include file='Public:header' />
+    <div class="container">
+        <div class="main">
+            <div class="publicleft contact">
+               <h1>Notre équipe est à votre disposition! </h1> 
+			   <br />
+			    <form id='form1' method="post" action='/Public/sendMail'>     
+                <table>
+					<tr>
+						<td>
+							<h3>Vous êtes : &nbsp;&nbsp;</h3>
+						</td>
+						<td>
+							<select id="clienttype" name="clienttype" class="input02">
+								<option value="0" selected='selected'>Une agence</option>
+								<option value="1">Un particulier</option>
+								<option value="2">Autre</option>
+							</select>
+						</td>
+					</tr>
+                    <tr>
+                        <td>
+                            <h3>Votre email : &nbsp;&nbsp;</h3>
+                        </td>
+                        <td>
+                            <input id="email" name="email" type="text" class="input02" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>Votre téléphone : &nbsp;&nbsp; </h3>
+                        </td>
+                        <td>
+                            <input id="telephone" name="telephone" type="text"  class="input02"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>Votre message: &nbsp;&nbsp;</h3>
+                        </td>
+                        <td>
+                            <textarea id="message" name="message" class="input02" style="height: 300px;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="tac">
+                            <a href="javascript:$('#form1').submit();" class="contactbtn">Envoyez</a>
+                        </td>
+                    </tr>
+                </table>
+				</form>
+            </div>
+            <div class="publicright desimg">
+                <a href="#">
+                    <img src="images/contactUs.jpg" /></a>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+<include file='Public:footer' />

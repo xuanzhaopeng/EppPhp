@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="1">
+		<struct>
+			<and abstract="true" mandatory="true" name="EppTest">
+				<feature name="Base"/>
+				<and abstract="true" name="Team">
+					<feature name="SVN"/>
+					<feature name="GIT"/>
+				</and>
+				<and abstract="true" name="Lang">
+					<feature name="C"/>
+					<feature name="CPP"/>
+					<feature name="PHP"/>
+				</and>
+				<feature name="Other"/>
+			</and>
+		</struct>
+		<constraints/>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>

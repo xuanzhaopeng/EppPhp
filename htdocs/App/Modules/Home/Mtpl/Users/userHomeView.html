@@ -1,0 +1,48 @@
+<include file='Public:headerWithoutImage' />
+    <div class="container02">
+        <div class="main">
+            <div class="userContainer">
+				<include file='Share:userViewNavigate' />
+                <br />
+                <include file="Share:userViewIndexHeader" />
+                
+                <br />
+                <div class="tip">
+                    <a href="/Users/view?uid={$uid}&type=life" class="contactbtn02">{$Think.lang.alllife}</a><br />{$alllife.content}
+                </div>
+                <br />
+                <div class="tip">
+                    <a href="/Users/view?uid={$uid}&type=gen" class="contactbtn02">{$Think.lang.genealogy}</a><br />
+                  {$genealogyName}
+                </div>
+                <br />
+                <div class="tip">
+                    <a href="/Users/view?uid={$uid}&type=pic" class="contactbtn02">{$Think.lang.picture}</a>
+                    <br />
+                    <br />
+                    <ul class="createPhoto">
+                    	<foreach name='userPics' item='pic'>
+                    		<li><img src="{$pic.name}" width="80" height="80" /></li><li>
+                    	</foreach>
+                    </ul>
+                    <div class="clear">
+                    </div>
+                </div>
+                <br />
+                <div class="tip">
+                    <a href="/Users/view?uid={$uid}&type=word" class="contactbtn02">{$Think.lang.catchword}</a>
+                    <br />
+                    <foreach name='catchwords' item='word'>
+                    {$word.content}
+                    </foreach>
+                </div>
+                <br />
+                <div class="tip">
+                    <a href="/Users/view?uid={$uid}&type=remark" class="contactbtn02">{$Think.lang.remark}</a><br />
+                    {$userInfo.remark}
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+<include file='Public:footer' />

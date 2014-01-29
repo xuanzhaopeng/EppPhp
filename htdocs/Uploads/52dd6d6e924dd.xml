@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="1">
+		<struct>
+			<and abstract="true" mandatory="true" name="SPL">
+				<feature mandatory="true" name="Base"/>
+				<feature name="EMF"/>
+				<alt name="Team">
+					<feature mandatory="true" name="SVN"/>
+					<feature mandatory="true" name="GIT"/>
+					<feature mandatory="true" name="Ant"/>
+				</alt>
+				<feature name="XTEXT"/>
+			</and>
+		</struct>
+		<constraints/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>

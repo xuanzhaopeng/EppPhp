@@ -1,0 +1,99 @@
+﻿<include file="Public:header" />
+
+     <link rel="stylesheet" href="__APP__/Public/css/common.css" />
+    <link rel="stylesheet" href="__APP__/Public/js/tree/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__APP__/Public/js/tree/css/jquery.jOrgChart.css"/>
+    <link rel="stylesheet" href="__APP__/Public/js/tree/css/custom.css"/>
+    <link href="__APP__/Public/js/tree/css/prettify.css" type="text/css" rel="stylesheet" />
+ 
+    <script type="text/javascript" src="__APP__/Public/js/tree/prettify.js"></script>
+    
+    <!-- jQuery includes -->
+    <script type="text/javascript" src="__APP__/Public/js/tree/jquery.min.js"></script>
+    <script type="text/javascript" src="__APP__/Public/js/tree/jquery-ui.min.js"></script>
+    <link rel='stylesheet' href='__APP__/Public/css/jquery-ui.css' type='text/css' >
+    
+    <script src="__APP__/Public/js/tree/jquery.jOrgChart.js"></script>
+    
+ 
+	   <div class="container02">
+        <div class="main">
+			<!--
+			<div>
+				<include file='Share:userViewModify' />
+			</div>
+			-->
+			<div class="userContainer">
+				<include file="Share:userViewNavigate" />
+				<br />
+				<include file="Share:userViewIndexHeader" />
+				
+			</div>
+		</div>
+		<div>
+			<ul id="org" style="display: none"><?php echo($tree);?></ul>           
+			<div id="chart" class="orgChart" style="overflow-x:scroll;"></div>
+		</div>
+	</div>
+
+<script>
+	var chickedNodeId = '';
+	$(function() {
+	    $("#org").jOrgChart({
+	        chartElement : '#chart',
+	        dragAndDrop  : false,
+	        nodeClickCallback: function(node){
+	        	$('.orgChart div').css('color', 'black');
+	        	$(node).css('color', 'red');
+				length = node.childNodes.length;
+				if( length == 2){
+					for (var i = 0; i < node.childNodes.length; i++) {
+							child = node.childNodes[i];
+							if(child.className == 'female' || child.className == 'male') {
+								$(child).css('color','red');
+							}
+					}
+				}else if( length == 1) {
+					leavesNode = node.childNodes[0];
+					for( var j=0; j< leavesNode.childNodes.length; j++) {
+						childchild = leavesNode.childNodes[j];
+						$(childchild).css('color','red');
+					}
+						
+				}
+				
+	        	chickedNodeId = $(node).attr('id');
+				$('#chickedNodeId').val(chickedNodeId);
+	        }
+	    });
+	    
+
+	    
+
+	});
+	
+	
+	function getGenealogyData(id) {
+		var url = "/Users/getGenealogyInfo";
+		$.post(url, {id:id}, function(data){
+			var obj = $.parseJSON(data);
+			if (obj.status == 1) {
+				setField(obj);
+			}
+		});
+	}
+	
+	function setField(obj) {
+		if (obj != null) {
+			$('#fname').val(obj.data['firstname']);
+			$('#lname').val(obj.data['lastname']);
+		}
+	}
+	
+	function finish() {
+		location.href = "/Users/userProfile?uid={$uid}&opt={$opt}";
+	}
+	
+</script>
+
+<include file="Public:footer" />

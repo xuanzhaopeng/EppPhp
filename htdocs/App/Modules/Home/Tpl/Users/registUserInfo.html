@@ -1,0 +1,132 @@
+<include file='Public:header' />
+
+    <div class="container02">
+        <div class="main">
+            <div class="publicleft userinformation">
+  				<form id='form1' method="post" action='/Users/doRegistUserInfo'>           
+				<table>
+					<tr>
+						<td colspan="2"><h3>Information d'accès administrateur</h3></td>
+					</tr>
+                    <tr>
+                        <td class="tar"><h4>*{$Think.lang.account}: &nbsp;&nbsp;<h4></td>
+                        <td><input type="text" class="input02" name='account' id='account'  /></td>
+                    </tr>
+                    <tr>
+                        <td class="tar"><h4>*{$Think.lang.password}: &nbsp;&nbsp;</h4></td>
+                        <td><input type="password" class="input02" name='password' /></td>
+                    </tr>
+                    <tr>
+                        <td class="tar"><h4>*{$Think.lang.email}: &nbsp;&nbsp;</h4></td>
+                        <td><input type="text" class="input02" name='email' /></td>
+                    </tr>
+					<tr>
+						<td colspan="2">&nbsp;&nbsp; </td>
+					<tr>
+						<td colspan="2"><h3>Informations sur la personne défunte</h3></td>
+					</tr>
+                    <tr>
+                        <td class="tar"><h4>{$Think.lang.firstname}: &nbsp;&nbsp;</h4></td>
+                        <td><input type="text" class="input02" name='firstname'/></td>
+                    </tr>
+                    <tr>
+                        <td class="tar"><h4>{$Think.lang.secondname}: &nbsp;&nbsp;</h4></td>
+                        <td><input type="text" class="input02" name='secondname'/></td>
+                    </tr>
+                    <tr>
+                        <td class="tar"><h4>{$Think.lang.lastname}: &nbsp;&nbsp;</h4></td>
+                        <td><input type="text" class="input02" name='lastname'/></td>
+                    </tr>
+                    <tr>
+                        <td class="tar"><h4>{$Think.lang.user_gender}: &nbsp;&nbsp;</h4></td>
+                        <td>
+                            <select name="gender" class="input02">
+								<option value="0">{$Think.lang.female}</option>
+								<option value="1" selected='selected'>{$Think.lang.male}</option>
+							</select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tar"><h4>{$Think.lang.birthday}: &nbsp;&nbsp;</h4></td>
+                        <td><input id='birthday' name='birthday' readonly="readonly"  type="text" class='input02'/></td>
+                    </tr>
+                    <tr>
+                        <td class="tar"><h4>{$Think.lang.deathday}: &nbsp;&nbsp;</h4></td>
+                        <td><input id='deathday' name='deathday' readonly='readonly' type="text" class="input02" /></td>
+                    </tr>
+                    <tr>
+                        <td class="tar"><h4>{$Think.lang.avatar}: &nbsp;&nbsp;</h4></td>
+                        <td>
+                            <div id="avatarImageDiv" style="width:200px;height:200px;background: #F1F1F1 url(__APP__/Public/images/avatar.jpg) no-repeat center center;  ">
+								
+							</div>
+                        	<input id="uploadAvatar" type="button" value="{$Think.lang.upload_avatar}"/>
+                        	<span>{$Think.lang.avatar_max_size}</span>
+                        	<input id="hidAvatar" name="hidAvatar" type="hidden" /> 
+                        </td>
+                    </tr>
+					<tr class='relation'>
+                        <td class="tar">&nbsp;&nbsp;</td>
+                        <td>
+                        	<input name="relationship" type="hidden" checked="checked" value="1"/>
+							<input name="relationship" type="hidden" value="2"/>
+						</td>
+                    </tr>
+					<tr>
+						<td colspan="2"><h3>Confidentialité</h3></td>
+					</tr>
+                    <tr class='chkvisiable'>
+                        <td class="tar"><h4>{$Think.lang.access_auth}: &nbsp;&nbsp;</h4></td>
+                        <td>
+						 <input id="chkboxSemiPublic" name="visiable" type="checkbox" value="1" />
+						 <label style="font-family: 'Bree Serif', serif;font-weight: 400;font-size: 13px;" for="chkboxSemiPublic">{$Think.lang.auth_semi_public}</label>
+						<input id="chkboxPublic" name="visiable" checked="checked" type="checkbox"  value="2"/>
+						<label style="font-family: 'Bree Serif', serif;font-weight: 400;font-size: 13px;" for="chkboxPublic">{$Think.lang.auth_public}</label>
+                        </td>
+                    </tr>
+                    <tr id='accesspwdTr'>
+                        <td class="tar"><h4>{$Think.lang.access_pwd}: &nbsp;&nbsp;</h4></td>
+                        <td><input id="accesspwd" type="password" class="input02" name="accesspwd" /></td>
+                    </tr>
+                    <tr id='pwdhintTr'>
+                        <td class="tar"><h4>{$Think.lang.pwd_hint}: &nbsp;&nbsp;</h4></td>
+                        <td><input id="pwdhint" type="text" class="input02" name="pwdhint" /></td>
+                    </tr>
+					<tr>
+						<td colspan="2">&nbsp;&nbsp; </td>
+					<tr>
+					<tr id="confirmbox">
+						<td colspan="2" class="tac"><span style="font-family: 'Bree Serif', serif;font-size:14px;">J'accepte les conditions générales d'OSE</span><input type="checkbox" onclick="confirmbutton.style.display=this.checked?'':'none';" /></td>
+					</tr>
+					<tr id="cgv">
+						<td colspan="2" class="tac"><a href="/Public/cgv/cgv.pdf" >Télécharger les conditions générales</a></td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;&nbsp; </td>
+					<tr>
+                    <tr style="display: none;" id="confirmbutton">
+                        <td colspan="2" class="tac">
+                            <a href="javascript:$('#form1').submit();" class="contactbtn" style="width:250px;" >{$Think.lang.submit}</a>
+                        </td>
+                    </tr>
+                </table>
+            	</form>
+            	<div id="dialog-set-avatar" style="display: none;">
+	            	<script>
+						var thumbPrefix = 'avatar_w200_w200_';
+						var thumbW = 200;
+						var thumbH = 200;
+					</script>
+				    <include file="Public:uploadImg" />
+				</div>
+            
+            </div>
+            <div class="publicright desimg">
+                <a href="#">
+                    <img src="__APP__/Public/images/test03.jpg" /></a>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+<include file='Public:footer' />

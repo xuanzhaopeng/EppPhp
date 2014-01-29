@@ -1,0 +1,67 @@
+﻿<include file="Public:header" />
+	<link rel='stylesheet' href='__APP__/Public/js/kindeditor/themes/default/default.css' type='text/css' >
+	<script type="text/javascript" src="__APP__/Public/js/kindeditor/kindeditor-min.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/kindeditor/zh_CN.js"></script>
+	
+<style>
+.catchword{margin:0;}
+.catchword strong, b {font-weight: bold;}
+.catchword em {font-style: italic;}
+</style>
+	
+    <div class="container02">
+        <div class="main">
+			<!--
+			<div>
+				<include file='Share:userViewModify' />
+			</div>
+			-->
+        	<div class="userContainer">
+        		<include file="Share:userViewNavigate" />
+				<br />
+                <include file="Share:userViewIndexHeader" />
+                <br />
+        		<div class="alllife">
+        			<input id='uid' type='hidden' value='{$uid}' /> 
+	                <div id='words' class='catchword' style="text-align:justify;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style='display:none' id='tmpcon'></div>
+<script>
+$(function(){
+	loadCatchword();
+});
+
+
+function loadCatchword() {
+	var uid = $('#uid').val();
+	if (uid == '') {
+		alert('{$Think.lang.pls_enter_basic_info}');
+		return false;
+	}
+	var html = '';	
+	$.post('/Users/loadCatchword', {uid:uid}, function(data){
+		var obj = $.parseJSON(data);
+		if (obj.status == 1) {
+			var words = obj.data;
+			if (words != undefined) {
+				for(i = 0; i < words.length; i++) {
+					j = i+1;
+					var content = HtmlDecode(words[i].content);
+					content = content.split('\\').join('');
+					html = html + "<li id="+words[i].id+">"+ content +"</li>";
+					//html = words[0].content;
+				}
+				//var tmp = $('#words').html(html);
+				$('#words').html(html);	
+			}
+		} else if (obj.status == 0) {
+			alert('{$Think.lang.load_data_failed}');
+		} 		
+	});
+}
+
+</script>
+<include file='Public:footer' />

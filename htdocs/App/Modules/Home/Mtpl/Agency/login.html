@@ -1,0 +1,52 @@
+﻿<include file="Public:header" />
+    <div class="wrapper">
+        <div class="main">
+            <div class="padding10px">
+                <img src="/Public/images/logo02.png" />
+                <br />
+                <form id="form1" method="post" action="/Agency/checkAgency">
+                <table>
+                    <tr>
+                        <td class="w105">
+                            Votre e-mail:
+                        </td>
+                        <td>
+                            <input name="email" type="text" value='' class="input_on022" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w105">
+                            Mot de passe:
+                        </td>
+                        <td>
+                            <input name="password" type="password" value='' class="input_on022" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td colspan="2">
+                            <input id='remember' type="checkbox" name='remember' value='1' checked="checked" />
+                            Se souvenir de mon identifiant
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <br />
+                            <a href="javascript:$('#form1').submit();" class="contactbtn">Soumettre</a>
+                            <br />
+                            <br />
+                            <a href="/Agency/createAgency" style="text-decoration: underline">Pas encore inscrit?<br>
+                                Contactez nous! </a>
+                        </td>
+                    </tr>
+                </table>
+                </form>
+            </div>
+        </div>
+    </div>
+<include file="Public:footer" />

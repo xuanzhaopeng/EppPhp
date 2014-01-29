@@ -1,0 +1,46 @@
+﻿<include file="Public:header"/>
+
+	<link rel='stylesheet' href='__APP__/Public/js/kindeditor/themes/default/default.css' type='text/css' >
+	<script type="text/javascript" src="__APP__/Public/js/kindeditor/kindeditor-min.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/kindeditor/zh_CN.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/kindeditor_functions.js"></script>
+<style>
+.catchword{margin:0;}
+.catchword strong, b {font-weight: bold;}
+.catchword em {font-style: italic;}
+</style>
+
+    <div class="wrapper">
+        <div class="main">
+            <div class="alllife">
+                <input id='uid' type='hidden' value='{$encryptid}' />
+                <center>  <br />
+                    <h2>
+                        Citations</h2>
+                </center>
+                <br />
+                <div class="tip">
+              
+                    <h3>
+                        Citations:</h3>
+                    <div id='words' class='catchword'>
+                    </div>
+                </div>
+                <br />
+                <textarea id='wordContent' name="content" style="width: 535px; height: 160px; "></textarea>
+                <br />
+                <center>
+                    <a href="javascript:void(0);" onclick="javascript:saveEditorContent('{$encryptid}');"
+                        id='btnSubmit' class="contactbtn">确认</a> <a href="#" onclick="javascript:goback('/Users/userProfile?uid={$encryptid}');"
+                            class="contactbtn">返回</a>
+                </center>
+                <br />
+            </div>
+        </div>
+    </div>
+<script>
+$(function(){
+	loaddata();
+});
+</script>
+<include file="Public:footer" />

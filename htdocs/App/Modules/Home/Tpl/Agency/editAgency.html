@@ -1,0 +1,28 @@
+﻿<include file='Public:header' />
+    <div class="container">
+        <div class="main">
+            <div class="publicleft contact">
+                <h3>{$Think.lang.agency_reg_info}</h3>
+                <br />
+                <form id='form1' name='form1' method="post" action='/Agency/saveInfo'>
+                	<input type="hidden" name="agencyId" value="{$agencyid}" />
+                	<input type="hidden" name="optType" value="edit" />
+                	<include file="Share:agencyInfoTable" />
+                </form>
+				<div id="dialog-set-avatar" style="display: none;">
+	            	<script>
+						var thumbPrefix = 'avatar_w200_w200_';
+						var thumbW = 200;
+						var thumbH = 200;
+					</script>
+				    <include file="Public:uploadImg" />
+				</div>
+            </div>
+            <div class="publicright desimg">
+                
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+<include file='Public:footer' />

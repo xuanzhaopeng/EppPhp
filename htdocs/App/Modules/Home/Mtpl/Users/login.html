@@ -1,0 +1,53 @@
+<include file='Public:header' />
+    <div class="wrapper">
+        <div class="main">
+            <div class="padding10px">
+                <img src="__APP__/Public/images/logo02.png" />
+                <br />
+                <form id="form1" method="post" action="/Users/checkUser">
+                <table>
+                    <tr>
+                        <td>
+                            Account: &nbsp;&nbsp;
+                        </td>
+                        <td>
+                            <input name="account" type="text"class="input_on022"onfocus="this.className='input022';this.onmouseout=''" onblur="this.className='input_on022';this.onmouseout=function(){this.className='input_on022'};" onmousemove="this.className='input022'" onmouseout="this.className='input_on022'" value='<?php echo $_COOKIE["user_account"] ?>'/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {$Think.lang.password}: &nbsp;&nbsp;
+                        </td>
+                        <td>
+                            <input name="password" type="password"class="input_on022"onfocus="this.className='input022';this.onmouseout=''" onblur="this.className='input_on022';this.onmouseout=function(){this.className='input_on022'};" onmousemove="this.className='input022'" onmouseout="this.className='input_on022'" value='<?php echo $_COOKIE["user_pwd"] ?>'/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td colspan="2">
+                            <input id='remember' type="checkbox" name='remember' value='1' checked="checked"/>
+                            {$Think.lang.check_in_login_status}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="tac">
+                            <br />
+                            <a href="javascript:$('#form1').submit();" class="contactbtn">{$Think.lang.submit}</a>
+                            <br />
+                            <br />
+                            <a href="/Agency/createUser" style="text-decoration: underline">{$Think.lang.has_not_been_registered} </a>
+                        </td>
+                    </tr>
+                </table>
+                </form>
+            </div>
+            <div class="right desimg">
+                <a href="#"> <img src="__APP__/Public/images/test03.jpg" /></a>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+<include file='Public:footer' />

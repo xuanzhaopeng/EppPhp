@@ -1,0 +1,132 @@
+﻿<include file="Public:header"/>
+    <div class="wrapper">
+        <div class="main">
+            <h3>
+                Informations de base</h3>
+            <form id='form1' method="post" action='/Users/doAddBasicUserInfo'>
+            <table  class="f12">
+                <tr>
+                    <td class="tar">
+                        *Votre e-mail: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input type="text" class="input02" name='email' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        *Mot de passe: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input type="password" class="input02" name='password' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        Nom: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input type="text" class="input02" name='firstname' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        JF: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input type="text" class="input02" name='secondname' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        Prenom: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input type="text" class="input02" name='lastname' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        Sexe: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <select name="gender">
+                            <option value="0">Female</option>
+                            <option value="1" selected='selected'>Male</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        Né le: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input id='birthday' name='birthday' readonly="readonly" type="text" class='input02' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        décédé le: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input id='deathday' name='deathday' readonly='readonly' type="text" class="input02" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        Photo: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <div id="avatarImageDiv" style="width: 200px; height: 200px; background-color: #F1F1F1;">
+                        </div>
+                        <input id="uploadAvatar" type="button" value="Télécharger les photos" />
+                        <span>Maximum 2MB</span>
+                        <input id="hidAvatar" name="hidAvatar" type="hidden" />
+                    </td>
+                </tr>
+                <tr class='relation'>
+                    <td class="tar">
+                        Relations: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input name="relationship" type="checkbox" checked="checked" value="1" />Famille
+                        <input name="relationship" type="checkbox" value="2" />Ami
+                    </td>
+                </tr>
+                <tr class='chkvisiable'>
+                    <td class="tar">
+                        L'accès: &nbsp;&nbsp;
+                    </td>
+                    <td><!--
+                        <input id="chkboxPrivate" name="visiable" type="checkbox" checked="checked" value="0" />Private
+                        --><input id="chkboxSemiPublic" name="visiable" type="checkbox" checked="checked" value="1" />Demi-Public
+                        <input id="chkboxPublic" name="visiable" type="checkbox" value="2" />Public
+                    </td>
+                </tr>
+                <tr id='accesspwdTr'>
+                    <td class="tar">
+                        Mot de passe pour visiteur: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input id="accesspwd" type="password" class="input02" name="accesspwd" />
+                    </td>
+                </tr>
+                <tr id='pwdhintTr'>
+                    <td class="tar">
+                        Hint: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input id="pwdhint" type="text" class="input02" name="pwdhint" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tac">
+                        <a href="javascript:$('#form1').submit();" class="contactbtn">Soumettre</a> <a href="javascript:goback('/Users/userProfile?uid=');"
+                            class="contactbtn">Retour</a>
+                    </td>
+                </tr>
+            </table>
+            </form>
+        </div>
+    </div>
+<include file="Public:footer" />

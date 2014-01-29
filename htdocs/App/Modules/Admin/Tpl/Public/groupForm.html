@@ -1,0 +1,248 @@
+<div class="block div_hide" id="groupForm">
+      <div class="content">
+        <h2 class="title">SPL Feature detail</h2>
+        <div class="inner">
+          <form id="form1" action="/Admin/Group/doEdit" method="post" class="form">
+			<input type='hidden' id='modelId' name='modelId'>
+            <input type='hidden' id='groupId' name='groupId'>
+            
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Name</label>
+              </div>
+              <input type="text" class="text_field" id='name' name='name' />
+              <span class="description">Ex: a simple text</span>
+            </div>
+            
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Description</label>
+              </div>
+              <input type="text" class="text_field" id='description' name='description' />
+              <span class="description">Ex: a simple text</span>
+            </div>
+            
+            <div class="group">
+				<div style="display:blcok;">&nbsp;
+						<div style="width:600px;height:40px;float: right;">
+							<div id="name_con_div" style="display:inline-block;">
+								<input type="text" id="dia_searchName" style="width:315px;height:28px;">	
+								<button class="button" type="button" onclick="dia_searchByName();" style="float: right;">search</button>
+							</div>
+						</div>
+					</div>   
+					<br />
+					<br />
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Features</label>
+				&nbsp; &nbsp;
+				Just show selected features:<input id="selectedFeature" type="checkbox" class="checkbox toggle" value='' />
+              </div>
+			  
+                  <table id="diadataTable" class="table">
+                    <tr>
+                      <th class="first"></th>
+                      <th>number</th>
+                      <th>id</th>
+                      <th>name</th>
+                    </tr>
+                    <tbody id='dialistBody'>
+                    
+                    </tbody>
+                  </table>
+                  <div id="diapagination" class="pagination"></div></br>
+            </div>
+
+            <div class="group navform wat-cf">
+                  <button id="btnEditSave" class="button" type="submit">
+                    <img src="../Public/images/icons/tick.png" alt="Save" /> Save
+                  </button>
+                  <span class="text_button_padding">or</span>
+                  <a class="text_button_padding link_button" href="javascript:cancel();" >Cancel</a>
+            </div>
+
+            <script>
+        			var thumbPrefix = 'logo_w200_w200_';
+        			var thumbW = 200;
+        			var thumbH = 200;
+			      </script>
+
+         </div>
+      </div>
+      
+              </form>
+            </div>
+          </div>
+        </div>
+<script type="text/javascript">
+var groupId = "";
+var dia_searchCondition = "";
+var dia_model_id;
+var dia_currentPageIndex;
+$(function(){
+	$('#selectedFeature').removeAttr('checked');
+	$('#selectedFeature').click(function(){
+		if($("#selectedFeature").is(':checked')){
+			dia_searchCondition = "";
+			$("#dia_searchName").val("");
+			dia_loadPageSelectedFeatures(1);
+			
+		}else{
+			dia_loadPage(1);
+		}
+	});
+	
+
+  $('#btnEditSave').click(function(){
+    $('#form1').ajaxSubmit({
+      success:function(data){
+        var obj = $.parseJSON(data);
+        if (obj.status > 0) {
+          alert(obj.msg);
+        } else {
+          cancel();
+          loadPage(1);
+        }
+      }
+    });
+    return false;
+  });
+});
+
+function dia_loadPageSelectedFeatures(pageIndex) {
+	currPageIndex = pageIndex;
+	//load data
+	$.post('/Admin/Group/getSelectedFeaturesPage',{p:pageIndex,id:groupId,model:dia_model_id},function(data){
+		var obj = $.parseJSON(data);
+		if (obj.status == 1) {
+			dia_loadData(obj);
+		} else if(obj.status == 2) {
+			$('#dialistBody').html('');
+		} else if (obj.status == 0) {
+		}
+	});
+}
+
+function dia_loadPage(pageIndex) {
+	dia_currentPageIndex = pageIndex;
+	//load data
+	$.post('/Admin/Group/getGroupPage',{p:pageIndex,id:groupId,fId:dia_searchCondition,model:dia_model_id},function(data){
+		var obj = $.parseJSON(data);
+		if (obj.status == 1) {
+			dia_loadData(obj);
+		} else if(obj.status == 2) {
+			$('#dialistBody').html('');
+		} else if (obj.status == 0) {
+		}
+	});
+}
+
+function dia_loadData(obj) {
+	var data = obj.data;
+	var html = '';
+	
+	//biuld pagination
+	var pagination = '';
+	var page = obj.page;
+	var nowPage = parseInt(page.nowPage);
+	var prevPage = nowPage - 1;
+	totalPages = page.totalPages;
+	var startNumber = (nowPage - 1)*15; 
+	
+	if (data != null) {
+		$('#modelId').val(data[0].model_id);
+		$('#groupId').val(data[0].id);
+		$('#name').val(data[0].name);
+		$('#description').val(data[0].description);
+	
+	if(data[0].status != 1){
+		for(i=0; i<data.features.length; i++) {
+			if(data.features[i].name != null || data.features[i].id != null ) {
+				if (data.features[i].contained) {
+						html = html + '<tr><td><input type="checkbox" class="checkbox" onclick="handleCheck(\''+data.features[i].id+'\',this);" name="features[]" value="'+data.features[i].id+'" checked/></td>';
+				}else{
+						html = html + '<tr><td><input type="checkbox" class="checkbox" onclick="handleCheck(\''+data.features[i].id+'\',this);" name="features[]" value="'+data.features[i].id+'" /></td>';
+				}
+		  
+				html = html + '<td>'+(i+1 + startNumber)+'</td>';
+				html = html + '<td>'+data.features[i].id+'</td>';
+				html = html + '<td>'+data.features[i].name+'</td></tr>';  
+			 }
+		}
+		$('#dialistBody').html(html);
+		
+		if (prevPage > 0) {
+			pagination = '<span class="disabled prev_page" style="cursor:pointer;" onclick="javascript:dia_loadPage('+prevPage+');">« Prev</span>';	
+		} else {
+			pagination = '<span class="disabled prev_page">« Prev</span>';
+		}
+		
+		for (i=1; i<= page.totalPages; i++) {
+			if (i == nowPage) {
+				pagination = pagination + '<span class="current">'+i+'</span>';
+			} else {
+				pagination = pagination + '<a href="javascript:dia_loadPage('+i+');">'+i+'</a>';					
+			}
+		}
+		var nextPage = nowPage + 1;
+		if (nextPage > page.totalPages) {
+			pagination = pagination + '<span class="next_page">Next »</span>';	
+		} else {
+			pagination = pagination + '<span class="next_page" style="cursor:pointer;" onclick="javascript:dia_loadPage('+nextPage+');">Next »</a></span>';
+		}
+		
+		$('#diapagination').html(pagination);
+	}
+
+	
+	}
+}
+
+function cancel() {
+	$("#groupForm").dialog("close");
+}
+
+function openEditDialog(id,model_id) {
+  $('#groupForm').dialog({
+		width: 800,
+           height: 620,
+           modal: true,
+           title: 'Edit',
+           create: function () { },
+           open: function () { },
+           close: function () { }
+	});
+	groupId = id;
+	dia_model_id = model_id;
+	$('#selectedFeature').removeAttr('checked');
+	$('#dia_searchName').val("");
+	html = '';
+	dia_searchCondition = '';
+	$('#dialistBody').html('');
+	dia_loadPage(1);
+}
+
+function dia_searchByName() {
+	dia_searchCondition = $('#dia_searchName').val();
+	if($("#selectedFeature").is(':checked')){
+		alert("Search function just when you unselect 'Just show selected features'");
+	}else{
+		dia_loadPage(1);
+	}
+}
+
+function handleCheck(featureid,cb) {
+	if(cb.checked){
+		//add
+		$.post('/Admin/Group/doAjaxEditFeature',{groupId:groupId,model:dia_model_id,feature:featureid,type:"add"},function(data){
+			var obj = $.parseJSON(data);
+		});
+	}else{
+		//delete
+		$.post('/Admin/Group/doAjaxEditFeature',{groupId:groupId,model:dia_model_id,feature:featureid,type:"delete"},function(data){
+			var obj = $.parseJSON(data);
+		});
+	}
+}
+
+</script>        

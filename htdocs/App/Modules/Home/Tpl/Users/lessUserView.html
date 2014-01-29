@@ -1,0 +1,62 @@
+<include file='Public:header' />
+    <div class="container02">
+        <div class="main">
+            <div class="userheader">
+                <div>
+                    <div class="publicleft">
+                        <if condition="$userInfo.avatar neq ''" >
+							<img src="{$userInfo.avatar}" width="200"  />
+						<else />
+							<img src="__APP__/Public/images/avatar.jpg" width="200" height="200" />
+						</if>
+                    </div>
+                    <div class="publicleft ml15" >
+						<div class="topPanel specialWords tal">
+							<h1>
+								{$userInfo.firstname}&nbsp;{$userInfo.lastname}
+								<if condition="$userInfo.secondname neq '' " >                        
+									, née {$userInfo.secondname}
+								</if>
+							</h1>
+						</div>
+						<div class="specialSmallWords tal">
+							{$userInfo.birthday} - {$userInfo.deathday} &nbsp; &nbsp;  {$Think.lang.die_the_age}&nbsp;:&nbsp;{$userInfo.age}&nbsp;{$Think.lang.year_of_age}
+						</div>
+						<br />
+						<div class=" tac">
+							<form id="form1" method="post" action="/Users/checkAccessPwd">
+								<table>
+									<input type='hidden' name='uid' value='{$uid}' />
+										<tr>
+											<td>
+												<h3>{$Think.lang.access_pwd}: &nbsp;&nbsp;</h3>
+											</td>
+											<td>
+												<input name="accesspwd" type="password" class="input" />
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<h3>{$Think.lang.pwd_hint}: &nbsp;&nbsp;</h3>
+											</td>
+											<td>
+												<span><h3>{$userInfo.pwdhint}</h3></span>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2" class="tac">
+												<br />
+												<a href="javascript:$('#form1').submit();" class="contactbtn">Accéder</a>
+											</td>
+										</tr>
+								</table>
+							</form>
+						</div>
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<include file='Public:footer' />

@@ -1,0 +1,68 @@
+<include file='Public:header' />
+
+    <div class="container02">
+        <div class="main" style="background: white;
+padding: 30px;
+font-size: 15px;
+margin-top:30px;
+min-height: 351px;">
+            <h1>Votre Panier</h1>
+			<br />
+		
+
+<!-- <form id='form1' action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post"> -->
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<!-- <input type="hidden" name="cmd" value="_s-xclick"> -->
+<input type="hidden" name="cmd" value="_xclick">
+<!-- <input type="hidden" name="hosted_button_id" value="T595967J2GNTA"> -->
+<input type="hidden" name="upload" value="1">
+<input type="hidden" name="rm" value="2"> 		
+<input type="hidden" name="charset" value="utf-8"> 		
+<input type="hidden" name="currency_code" value="{:C('PAYPAL_CURRENCY_CODE')}"> 		
+<!-- <input type="hidden" name="business" value="basile.camphuis@essec.edu"> -->
+<input type="hidden" name="business" value="{:C('PAYPAL_ACCOUNT')}">		
+<input type="hidden" name="cancel_return" value="{$host}/Paypal/checkout"> 
+<input type="hidden" name="return" value="{$host}/Paypal/thanks?item_number={$uid}">	
+<input type="hidden" name="notify_url" value="{$host}/Paypal/notify">	
+<input type="hidden" name="item_number" value="{$uid}"> 		
+<input type="hidden" name="item_name" value="{:L('activate_the_personal_space')}"> 
+<input type="hidden" name="quantity" value="{:C('PAYPAL_QUANTITY')}"> 		
+<input type="hidden" name="amount" value="{:C('PAYPAL_AMOUNT')}"> 	
+<table style="width: 100%;clear: both;font-size: 15px;margin: 5px 0;">
+	<thead >
+		<tr style="font-size: 15px;">
+			<th>Votre commande</th>
+			<th>Disponibilité</th>
+			<th>Quantité</th>
+			<th>Prix TTC</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Pack OSE</td>
+			<td>Immédiate</td>
+			<td>1</td>
+			<td>{:C('PAYPAL_AMOUNT')}</td>
+		</tr>
+		<tr>
+			<td colspan=4> &nbsp;&nbsp;</td>
+		<tr>
+	</tbody>
+</table>
+<br />
+	<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
+	<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+<!--
+<a href="javascript:$(#'form1').submit();">
+	<input type="image" src="__APP__/Public/images/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">	
+</a>
+-->
+</form>
+ 
+
+
+        </div>
+    </div>
+    
+    
+<include file='Public:footer' />

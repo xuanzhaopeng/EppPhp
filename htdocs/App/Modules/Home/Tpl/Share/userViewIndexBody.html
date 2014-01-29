@@ -1,0 +1,57 @@
+<div class="tip" style="height:65px;overflow:hidden;">
+    <div class='publicleft' style="width:20%; " ><a href="/Users/view?uid={$uid}&type=life" class="contactbtn04" >{$Think.lang.alllife}</a></div>
+	<div class='publicright' style="width:73%; margin-left:5px;text-align:justify;" id='alllifediv' style="white-space: normal;word-break: break-all;">{$alllife.content}</div>
+</div>
+<br />
+<div class="tip" style="height:65px;overflow:hidden;">
+    <div class='publicleft' style="width:20%;" ><a href="/Users/view?uid={$uid}&type=gen" class="contactbtn04" >{$Think.lang.genealogy}</a></div>
+	<div class='publicright' style="width:73%; margin-left:5px;"> 
+		{$genealogyName}
+	</div>
+</div>
+<br />
+<div class="tip" style="height:65px;overflow:hidden;">
+    <div class='publicleft' style="width:20%;" ><a href="/Users/view?uid={$uid}&type=pic" class="contactbtn04">{$Think.lang.picture}</a></div>
+	<div class='publicright' style="width:73%; margin-left:5px;"> 
+    <ul class="createPhoto">
+    	<foreach name='userPics' item='pic'>
+    		<li><img src="{$pic.name}" height="68" /></li><li>
+    	</foreach>
+    </ul>
+	</div>
+    <div class="clear">
+    </div>
+</div>
+<br />
+<div class="tip" style="height:65px;overflow:hidden;">
+    <div class='publicleft' style="width:20%;" ><a href="/Users/view?uid={$uid}&type=word" class="contactbtn04">{$Think.lang.catchword}</a></div>
+    <div id="catchword" class='publicright' style="width:73%; margin-left:5px;" ></div>
+    <div id='catchwordHid' style="display: none;">
+	<foreach name='catchwords' item='word'>
+	<li>{$word.content}</li>
+	</foreach>
+	</div>
+</div>
+<br />
+<div class="tip" style="height:65px;overflow:hidden;">
+    <div class='publicleft' style="width:20%;" ><a href="/Users/view?uid={$uid}&type=remark" class="contactbtn04">{$Think.lang.remark}</a></div>
+    <div class='publicright' style="width:73%; margin-left:5px;text-align:justify;" id='remarkdiv'>{$remark}</div>
+</div>
+<br />
+    <script type="text/javascript">
+<!--
+$(function() {
+	var wordHid = $('#catchwordHid').html();
+	wordHid = HtmlDecode(wordHid);
+	var catchword = $('#catchword').html(wordHid);
+	
+	var alllifestr = $('#alllifediv').html();
+	alllifestr = HtmlDecode(alllifestr);
+	$('#alllifediv').html(alllifestr);
+	
+	var remarkstr = $('#remarkdiv').html();
+	remarkstr = HtmlDecode(remarkstr);
+	$('#remarkdiv').html(remarkstr);
+});
+//-->
+</script> 

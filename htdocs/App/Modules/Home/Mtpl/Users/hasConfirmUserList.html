@@ -1,0 +1,38 @@
+﻿<include file="Public:header"/>
+    <div class="wrapper">
+        <div class="main">
+            <center>
+                <a href="#">
+                    <img src="/Public/images/test01.jpg" /></a></center>
+            <div class="usercenter">
+                <a href="/Public/logout">【Deconnection】</a>
+                <br />
+                <a href="#">地址 : -</a>
+            </div>
+            <br />
+           <center> <input type="text" class="userinput"  placeholder="请输入您要搜索的关键字" />
+         <div style=" height:8px"></div>
+            <input type="submit" value="Chercher par nom"    class="f12"  />
+            <input type="submit" value="Chercher par Date"    class="f12"  /></center>
+            <table class="datalist" id='userList'>
+	                <thead>
+	                    <td>{$Think.lang.firstname}</td>
+	                    <td>{$Think.lang.lastname}</td>
+	                    <td>{$Think.lang.regist_datetime}</td>
+	                    <td>{$Think.lang.download_two_dimension_code}</td>
+	                </thead>
+	                <tbody id='userListbody'></tbody>
+                </table>
+            <input type="button" value="Retour" onclick="goback('/Agency/index');" />
+
+           <br /><br />
+        </div>
+    </div>
+    <script>
+$(function(){
+	//load has confirmed user list;
+	var type = '1';
+	loadUserList(type);
+});
+</script>
+<include file="Public:footer" />

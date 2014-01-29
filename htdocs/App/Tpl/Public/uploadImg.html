@@ -1,0 +1,43 @@
+<script type="text/javascript" src="../Public/js/ajaxFileUpload.js"></script>
+
+<div>
+	<input type="file" id="aFile" name="aFile" onchange="uploadImg();"/>
+	<div id="imgThumbDiv" style="width:200px;height: 200px;background-color: #F8F3F3"></div>
+	<input type="button" value="{$Think.lang.ok}" onclick="uploadOk();"/>
+	<input type="button" value="{$Think.lang.cancel}" onclick="closeDialog();" />
+</div>
+<script>
+	var imgName = "";
+
+	function uploadImg() {
+		var thumbPrefix = 'logo_w200_w200_';
+		$.ajaxFileUpload({
+            url: '/Public/uploadImg',
+            secureuri: false,
+            fileElementId: 'aFile',
+            data:{prefix:thumbPrefix,thumbW:200,thumbH:200},
+            type:'json',
+            success: function(data){
+            	var obj = $.parseJSON(data);
+            	if (obj.status == 1) {
+            		imgName = "__ROOT__/Uploads/" + thumbPrefix + obj.imgName;
+            		$('#imgThumbDiv').css('background', "url("+imgName+") no-repeat");
+            	}
+            },
+            error: function () {
+                alert("{$Think.lang.upload_failed}");
+            }
+        });
+	}
+	function uploadOk() {
+		if(window.OnImgUpload) {
+			OnImgUpload(imgName);
+		}
+		closeDialog();
+	}
+	function closeDialog() {
+		if(window.OnUploadDialogClose) {
+			OnUploadDialogClose();
+		}	
+	}
+</script>

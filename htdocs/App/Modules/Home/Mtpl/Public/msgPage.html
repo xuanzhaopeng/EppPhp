@@ -1,0 +1,49 @@
+<include file="Public:header" />
+<div class="container">
+      <div class="main">
+		<div class="message">
+		<table class="message"  cellpadding=0 cellspacing=0 >
+			<tr>
+				<td height='3'  class="topTd" ></td>
+			</tr>
+			<tr class="row" >
+				<th class="tCenter space">{$msgTitle}</th>
+			</tr>
+			<present name="message" >
+			<tr class="row">
+				<td style="color:blue">{$message}</td>
+			</tr>
+			</present>
+			<present name="error" >
+			<tr class="row">
+				<td style="color:red">{$error}</td>
+			</tr>
+			</present>
+			<present name="closeWin" >
+				<tr class="row">
+				<td>{$Think.lang.sys_will} <span id="wait" style="color:blue;font-weight:bold">3</span> {$Think.lang.just_click} <a id="href" href="{$jumpUrl}">{$Think.lang.here}</a> {$Think.lang.close}</td>
+			</tr>
+			</present>
+			<notpresent name="closeWin" >
+			<tr class="row">
+				<td>{$Think.lang.sys_will} <span id="wait" style="color:blue;font-weight:bold">3</span> {$Think.lang.auto_jump_just_click} <a id="href" href="{$jumpUrl}">{$Think.lang.here}</a> {$Think.lang.jumpto}</td>
+			</tr>
+			</notpresent>
+			<tr>
+				<td height='3' class="bottomTd"></td>
+			</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	(time == 0) && (location.href = href);
+}, 1000);	
+})();
+</script>
+
+<include file="Public:footer" />

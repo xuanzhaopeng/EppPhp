@@ -1,0 +1,1 @@
+<?php	return array ( 0 => 'name', 1 => 'version', 2 => 'repository', '_autoinc' => false, '_pk' => 'repository', '_type' => array ( 'name' => 'varchar(100)', 'version' => 'varchar(100)', 'repository' => 'varchar(200)', ), );?>

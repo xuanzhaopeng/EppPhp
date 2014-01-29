@@ -1,0 +1,76 @@
+<include file='Public:header' />
+<div class="container">
+    <div class="main" style="min-height:600px"  >
+        <div class="publicleft" style="margin-top: 30px;">
+			<!--LOGIN FORM-->
+				<div name="login-form" class="login-form" >
+					<!--HEADER-->
+						<div class="loginheader">
+							<h2>{$agency.name}</h2>
+				<!--TITLE--><if condition="$agency.logo neq '' ">
+								<a href="#"><img src="{$agency.logo}" /></a>
+							<else />
+								<a href="#"><img src="__APP__/Public/images/test01.jpg" /></a>
+							</if><!--END TITLE-->
+						</div>
+					<!--END HEADER-->
+    
+					<!--FOOTER-->
+					<div class="footer">
+						<div class="usercenter" style="text-align:left;">
+							<table>
+								<tr>
+									<td style="width:100px;">Adresse email : </td>
+									<td>{$agency.email}</td>
+								</tr>
+								<tr>
+									<td valign="top">Adresse postale : </td>
+									<td>{$agency.road_name}</td>
+								</tr>
+								<tr>
+									<td>Ville : </td>
+									<td>{$agency.city}</td>
+								<tr/>
+								<tr>
+									<td>Code Postal : </td>
+									<td>{$agency.postcode}</td>
+								</tr>
+								<tr>
+									<td>Téléphone : </td>
+									<td>{$agency.phone}</td>
+								</tr>
+							</table>
+							<div style="text-align:center;">
+								<a style="margin:0 auto;" href="/Agency/editAgency?id={$agencyid}">【Modifier mes informations】</a>
+							</div>
+							<br />
+						</div>
+				   </div>
+					<!--END FOOTER-->
+				</div>
+				<!--END LOGIN FORM-->
+			
+			
+        </div>
+		
+
+        <div class="publicleft usercreate">
+           
+            <br />
+            <a href="/Users/userProfile" class="contactbtn03">Nouvelle création</a>
+            <br />
+            <br />  <br />
+			<a href="/Users/unconfirmedUserList" class="contactbtn03">Pages en cours de création</a>
+            <br />
+            <br />  <br />
+			<a href="/Users/hasconfirmedUserList" class="contactbtn03">Pages publiées</a>
+
+
+        </div>
+        
+        <div class="clear">
+        </div>
+    </div>
+</div>
+
+<include file='Public:footer' />

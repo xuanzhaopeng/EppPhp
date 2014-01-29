@@ -1,0 +1,32 @@
+<include file="Public:header" />
+
+<style>
+.createuser{margin:0;}
+.createuser li{list-style-type: none;}
+.createuser a:HOVER{text-decoration: underline;}
+</style>
+ <div class="container02">
+    <div class="main">
+		<div class='createuser'>
+			<li><a href="/Agency/basicUserInfo?uid={$uid}">{$Think.lang.basic_user_info}</a></li>
+			<li><a href="/Agency/genealogy?uid={$uid}">{$Think.lang.genealogy}</a></li>
+			<li><a href="/Agency/catchword?uid={$uid}">{$Think.lang.catchword}</a></li>
+			<li><a href="/Agency/userPicture?uid={$uid}">{$Think.lang.picture}</a></li>
+			<li><a href="/Agency/alllife?uid={$uid}">{$Think.lang.alllife}</a></li>
+			<li><a href="/Agency/remark?uid={$uid}">{$Think.lang.remark}</a></li>
+		
+			
+		</div>
+		
+		
+		<div style="margin:0 auto;width:100px;height:100px;line-height:24px;overflow:auto; vertical-align:middle" >
+			<li style="list-style-type: none;">
+				<if condition='$hasConfirmed eq false ' >
+					<input type="button" value="{$Think.lang.preview}" onclick="preview();" />
+				</if>
+				<input type="button" value="{$Think.lang.goback}" onclick="goback('/Agency/index');" />
+		</li>
+		</div>
+	</div>
+</div>
+<include file="Public:footer" />

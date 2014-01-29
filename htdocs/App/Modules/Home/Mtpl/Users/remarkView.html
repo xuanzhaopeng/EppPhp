@@ -1,0 +1,40 @@
+﻿<include file="Public:headerWithoutImage" />
+    <div class="wrapper">
+        <div class="main">
+        
+        	<div class="userContainer">
+        		<include file="Share:userViewIndexHeader" />
+        		<div class="alllife">
+        			<input id='uid' type='hidden' value='{$uid}' /> 
+					<div id="alllifediv" style="width: 80%; margin: 0 auto; text-align: justify;">
+						{$remark.remark}
+					</div>
+					<br />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <if condition="$group neq 'visiter' " >
+	<include file="Share:floatBar"/>
+	<br/>
+</if>
+
+<include file="Public:footer" />
+    <script type="text/javascript">
+<!--
+$(function() {
+	
+	var alllifestr = $('#alllifediv').html();
+	alllifestr = HtmlDecode(alllifestr);
+	$('#alllifediv').html(alllifestr);
+
+});
+//-->
+</script> 
+
+
+<br/><br/><br/><br/>
+<div style="position: fixed;  left: 0px; bottom: 0px; ">	
+	<include file="Share:userViewNavigate" />
+	</div>

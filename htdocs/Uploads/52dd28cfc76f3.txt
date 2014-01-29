@@ -1,0 +1,103 @@
+X ALWAYS Y := If X is selected then Y is selected in every valid configuration.
+X MAYBE  Y := If X is selected then Y is selected in at least one but not all valid configurations. 
+X NEVER  Y := If X is selected then Y cannot be selected in any valid configuration.
+
+C ALWAYS Lang
+C ALWAYS EppTest
+C MAYBE Team
+C MAYBE SVN
+C MAYBE Other
+C MAYBE Base
+C MAYBE GIT
+C MAYBE PHP
+C MAYBE CPP
+
+EppTest MAYBE Team
+EppTest MAYBE C
+EppTest MAYBE SVN
+EppTest MAYBE Lang
+EppTest MAYBE Other
+EppTest MAYBE Base
+EppTest MAYBE GIT
+EppTest MAYBE PHP
+EppTest MAYBE CPP
+
+CPP ALWAYS Lang
+CPP ALWAYS EppTest
+CPP MAYBE Team
+CPP MAYBE C
+CPP MAYBE SVN
+CPP MAYBE Other
+CPP MAYBE Base
+CPP MAYBE GIT
+CPP MAYBE PHP
+
+Other ALWAYS EppTest
+Other MAYBE Team
+Other MAYBE C
+Other MAYBE SVN
+Other MAYBE Lang
+Other MAYBE Base
+Other MAYBE GIT
+Other MAYBE PHP
+Other MAYBE CPP
+
+GIT ALWAYS Team
+GIT ALWAYS EppTest
+GIT MAYBE C
+GIT MAYBE SVN
+GIT MAYBE Lang
+GIT MAYBE Other
+GIT MAYBE Base
+GIT MAYBE PHP
+GIT MAYBE CPP
+
+Base ALWAYS EppTest
+Base MAYBE Team
+Base MAYBE C
+Base MAYBE SVN
+Base MAYBE Lang
+Base MAYBE Other
+Base MAYBE GIT
+Base MAYBE PHP
+Base MAYBE CPP
+
+Lang ALWAYS EppTest
+Lang MAYBE Team
+Lang MAYBE C
+Lang MAYBE SVN
+Lang MAYBE Other
+Lang MAYBE Base
+Lang MAYBE GIT
+Lang MAYBE PHP
+Lang MAYBE CPP
+
+Team ALWAYS EppTest
+Team MAYBE C
+Team MAYBE SVN
+Team MAYBE Lang
+Team MAYBE Other
+Team MAYBE Base
+Team MAYBE GIT
+Team MAYBE PHP
+Team MAYBE CPP
+
+SVN ALWAYS Team
+SVN ALWAYS EppTest
+SVN MAYBE C
+SVN MAYBE Lang
+SVN MAYBE Other
+SVN MAYBE Base
+SVN MAYBE GIT
+SVN MAYBE PHP
+SVN MAYBE CPP
+
+PHP ALWAYS Lang
+PHP ALWAYS EppTest
+PHP MAYBE Team
+PHP MAYBE C
+PHP MAYBE SVN
+PHP MAYBE Other
+PHP MAYBE Base
+PHP MAYBE GIT
+PHP MAYBE CPP

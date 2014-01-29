@@ -1,0 +1,100 @@
+<include file="Public:header" />
+<style>
+    .createuser
+    {
+        margin: 0;
+    }
+    .createuser li
+    {
+        list-style-type: none;
+    }
+    .createuser a:HOVER
+    {
+        text-decoration: underline;
+    }
+</style>
+<div class="container">
+    <div class="main">
+        <div class="publicleft usercreate02">
+            <a class="contactbtn03" href="/Users/basicUserInfo?uid={$uid}">{$Think.lang.basic_user_info}</a>
+			<br />
+            <br />
+            <a class="contactbtn03" href="/Users/alllife?uid={$uid}">{$Think.lang.alllife}</a>
+            <br />
+            <br />
+            <a class="contactbtn03" href="/Users/genealogy?uid={$uid}">{$Think.lang.genealogy}</a>
+			<br />
+            <br />
+            <a class="contactbtn03" href="/Users/userPicture?uid={$uid}">{$Think.lang.picture}</a>
+            <br />
+            <br />
+            <a class="contactbtn03" href="/Users/catchword?uid={$uid}">{$Think.lang.catchword}</a>
+            <br />
+            <br />
+            <a class="contactbtn03" href="/Users/remark?uid={$uid}">{$Think.lang.remark}</a>
+            <br />
+            <br />
+            <div style="margin-left: -1px; height: 60px">
+				<input type="button" value="{$Think.lang.preview}" onclick="preview();" class="contactbuttom" />
+				<!--
+				<if condition="$userGroup eq 'agency' ">
+					<input type="button" class="contactbuttom" value="{$Think.lang.goback}" onclick="goback();" />  <br />
+            	<else />
+            		<input type="hidden" class="contactbuttom" value="{$Think.lang.goback}" onclick="goback();" />  <br />
+            	</if>
+				-->
+            </div>
+			
+            
+            <if condition="$hasConfirmed eq 0" >
+            	<if condition="$userGroup eq 'agency'">
+	            	<div  >
+	                	<a class="contactbtn03" href="/Users/tempStorage?uid={$uid}">Enregister</a><br /><br />
+	                	<a class="contactbtn03" href="/Users/confirmSave?uid={$uid}">Publier</a><br /><br />
+	            	</div>
+				<else />
+					<div>
+							<a style="width:200px;" href="/Paypal/checkout?uid={$uid}" class="contactbtn">Procéder au paiement</a>
+					</div>
+				</if>
+
+           	</if>
+        </div>
+        <div class="publicright usercreate02" style="opcity:0.3; width:40%;padding:40px; text-align:justify; font-size:16px;">
+            <p>Pour constituer votre page mémoire, veillez à remplir en premier lieu la section "Informations Générales" qui contient les informations indispensables : Accès administrateur et informations sur la personne défunte. </p>
+			<br />
+			<p>Puis remplissez chacune des sections ci contre, avant de valider l'ensemble de ces informations. Vous pouvez visualiser le rendu avant de le valider en cliquant sur "Aperçu".</p>
+			<br />
+			<p>
+Une fois la page validée vous pourrez toujours la modifier avec vos accès administrateur.
+Pour vous aider, n'hésitez pas à cliquer ci dessous pour voir un exemple.</p>
+			<br />
+			<div class="menuitem button35060" >
+                    <div style="margin:0 auto;">
+						<a href="/PLorisse">
+							<div class="inner-menu-wrapper"></div><div class="inner-menu-wrapper-inv"></div>
+							<H1>Voir un exemple</H1>
+						</a>
+						<br />
+                    </div>
+                </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+<script>
+    function preview() {
+        location.href = "/Users/preview?uid={$uid}";
+    }
+    function goback() {
+        var group = '{$userGroup}';
+        if (group == 'common') {
+            location.href = "/Users/index";
+        } else {
+            location.href = '/Agency/index';
+        }
+
+    }
+</script>
+<include file="Public:footer" />

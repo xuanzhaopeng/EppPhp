@@ -1,0 +1,90 @@
+@charset "utf-8";
+
+ 
+body { background-color:#EFEFEF}
+
+ 
+ 
+.wrapper {background:url(../images/bg02.jpg) repeat-x; overflow:hidden;  width:100%;   min-height:577px;  }
+.container {background:url(../images/bg02.jpg) repeat-x; overflow:hidden;  width:100%;   min-height:611px; margin:0 auto}
+
+.container02 {background:url(../images/bg02.jpg) repeat-x; overflow:hidden;  width:100%;   margin:0 auto;min-height:600px}
+.main {width:815px; margin:0 auto}
+ 
+#footer { background-color:#504E63; text-align:center; padding:10px; color:White}
+#footer a{ color:White; }
+#footer a:hover{ color:White; text-decoration:underline}
+#header { width:815px; margin:0 auto}
+  
+ 
+.clearfix{display: block;}
+.hidden {	display:none}
+.clear {	clear:both; }
+
+/**宽度**/
+.w50 {width:50px}
+.pos_relative {position:relative}
+.x-center {margin:0 auto;}
+.w620 {width:620px}
+.w452 {width:452px}
+/**字号**/
+.f12{font-size:12px}
+.f14{font-size:14px}
+.fsize18{ font-size:18px}
+.fsize16{ font-size:16px}
+/**颜色**/
+.color999{color:#999}
+.gray1{color:#999}
+.red{color:red}
+.black{color:black}
+.bdred {color:red; font-weight:bold}
+.bd {font-weight:bold}
+
+.leftside {float:left;}
+.rightside {float:right;} 
+
+
+/**text-align**/
+.tar {text-align:right} 
+.tac {text-align:center}
+ 
+
+/**margin-left**/
+._ml4{margin-left:-4px} 
+.ml1{margin-left:1px} 
+.ml5{margin-left:5px}  
+.ml7{margin-left:7px}
+.ml8{margin-left:8px}
+.ml10{margin-left:10px}
+.ml15{margin-left:15px}
+.ml25{margin-left:25px}
+.ml51{margin-left:51px}
+.ml118{margin-left:118px}
+
+/**marginright**/
+.mr5{margin-right:5px}
+.mr7{margin-right:7px}
+.mr10{margin-right:10px}
+
+/**margin-top**/
+.mt2{margin-top:2px}
+.mt5{margin-top:5px}
+.mt10{margin-top:10px}
+.mt15{margin-top:15px}
+.mt20{margin-top:20px}
+.mt25{margin-top:25px}
+._mt10{margin-top:-10px}
+._mt328{margin-top:328px}
+
+/**margin-bottom**/
+.mb10 {margin-bottom:10px;}
+.mb15 {margin-bottom:15px;}
+._mb2{margin-bottom:-2px}
+
+/**margin-height**/
+.lineheight21{ line-height:21px}.lineheight23{ line-height:23px}.lineheight25{ line-height:25px}
+
+/**padding-left**/
+.pd5{padding:5px}
+.pdl10{padding-left:10px}
+ 

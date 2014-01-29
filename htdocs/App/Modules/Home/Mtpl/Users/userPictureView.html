@@ -1,0 +1,60 @@
+﻿
+<include file="Public:headerWithoutImage" />
+
+<link rel='stylesheet' href='../Public/js/lightbox/css/jquery.lightbox-0.5.css' type='text/css' >
+<script type="text/javascript" src="../Public/js/lightbox/jquery.lightbox-0.5.js"></script>
+
+<style>
+    .picture
+    {
+        display: inline-block;
+        width:300px;
+    }
+    .picture li
+    {
+        list-style-type: none;
+        width: 150px;
+    }
+	
+</style>
+<div class="wrapper">
+    <div class="main">
+    	<div class="userContainer">
+        	<include file="Share:userViewIndexHeader" />
+        	<div class="piclist">
+               <input id='uid' type='hidden' value='{$uid}' />
+                <div style="clear: both">
+                </div>
+                
+                <div id='J_imageView'>
+                <ul>
+                	<foreach name="pics" item="pic">
+                		<li><div style="width:135px"> <div class="piclistdiv"><a href="{$pic.name}"><img src="{$pic.name}" onload="imgReSize(this,135,135)"  /></a></div></div></li>
+                	</foreach>
+                </ul>
+                </div>
+                <div style="clear: both">
+                </div>
+            </div>	
+        </div>
+                  
+        <div style="clear: both">
+        </div>
+    </div>
+</div>
+<script>
+$(function(){
+	$('#J_imageView a').lightBox();
+});
+</script>
+
+<if condition="$group neq 'visiter' " >
+	<include file="Share:floatBar"/>
+	<br/>
+</if>
+
+<include file='Public:footer' />
+<br/><br/><br/><br/>
+<div style="position: fixed;  left: 0px; bottom: 0px; ">	
+	<include file="Share:userViewNavigate" />
+</div>

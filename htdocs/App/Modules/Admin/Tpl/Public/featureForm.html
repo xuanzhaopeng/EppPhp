@@ -1,0 +1,106 @@
+<div class="block div_hide" id="featureForm">
+      <div class="content">
+        <h2 class="title">Repo List</h2>
+        <div class="inner">  
+            <div class="group">
+              <table id="diadataTable" class="table">
+                    <tr>
+                      <th>Repository</th>
+                    </tr>
+                    <tbody id='dialistBody'>
+                    
+                    </tbody>
+              </table>
+              <div id="diapagination" class="pagination"></div></br>
+            </div>
+
+            <script>
+        			var thumbPrefix = 'logo_w200_w200_';
+        			var thumbW = 200;
+        			var thumbH = 200;
+			</script>
+
+         </div>
+      </div>
+      
+</div>
+<script type="text/javascript">
+var featureId = "";
+
+
+function dia_loadPage(pageIndex) {
+	//load data
+	$.post('/Admin/Feature/loadRepositoryPage',{p:pageIndex,id:featureId},function(data){
+		var obj = $.parseJSON(data);
+		if (obj.status == 1) {
+			dia_loadData(obj);
+		} else if(obj.status == 2) {
+			$('#dialistBody').html('');
+		} else if (obj.status == 0) {
+		}
+	});
+}
+
+function dia_loadData(obj) {
+	var data = obj.data;
+	var html = '';
+	
+	//biuld pagination
+	var pagination = '';
+	var page = obj.page;
+	var nowPage = parseInt(page.nowPage);
+	var prevPage = nowPage - 1;
+	totalPages = page.totalPages;
+	var startNumber = (nowPage - 1)*15; 
+	
+	if (data != null) {
+	
+		for(i=0; i<data.length; i++) {
+			html = html + '<tr><td>'+data[i].url + '</td></tr>';
+		}
+		$('#dialistBody').html(html);
+	
+	
+		if (prevPage > 0) {
+			pagination = '<span class="disabled prev_page" style="cursor:pointer;" onclick="javascript:dia_loadPage('+prevPage+');">« Prev</span>';	
+		} else {
+			pagination = '<span class="disabled prev_page">« Prev</span>';
+		}
+	
+		for (i=1; i<= page.totalPages; i++) {
+			if (i == nowPage) {
+				pagination = pagination + '<span class="current">'+i+'</span>';
+			} else {
+				pagination = pagination + '<a href="javascript:dia_loadPage('+i+');">'+i+'</a>';					
+			}
+		}
+		var nextPage = nowPage + 1;
+		if (nextPage > page.totalPages) {
+			pagination = pagination + '<span class="next_page">Next »</span>';	
+		} else {
+			pagination = pagination + '<span class="next_page" style="cursor:pointer;" onclick="javascript:dia_loadPage('+nextPage+');">Next »</a></span>';
+		}
+	
+		$('#diapagination').html(pagination);
+	}
+}
+
+function cancel() {
+	$("#featureForm").dialog("close");
+}
+
+function openEditDialog(id) {
+  $('#featureForm').dialog({
+		width: 800,
+           height: 620,
+           modal: true,
+           title: 'Edit',
+           create: function () { },
+           open: function () { },
+           close: function () { }
+	});
+	featureId = id;
+	dia_loadPage(1);
+}
+
+</script>        

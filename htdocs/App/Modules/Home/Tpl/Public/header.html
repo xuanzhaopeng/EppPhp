@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Offrez un Sourire Eternel </title>
+    <link rel="stylesheet" href="__APP__/Public/css/common.css" type="text/css" />
+    <link rel="stylesheet" href="__APP__/Public/css/public.css" type="text/css" />
+    <link rel='stylesheet' href='__APP__/Public/css/jquery-ui.css' type='text/css' >
+	<link rel='stylesheet' href='__APP__/Public/css/AnimationStyle.css' type='text/css' >
+	<link rel='stylesheet' href='__APP__/Public/css/buttonStyle.css' type='text/css' >
+	<link rel='stylesheet' href='__APP__/Public/css/loginStyle.css' type='text/css' >
+	<link rel="shortcut icon" href="__APP__/Public/images/favicon.ico">
+    
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/jquery-ui-1.8.11.min.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/functions.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/jquery.proximity.js"></script>
+	
+	<script type="text/javascript" src="__APP__/Public/js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/animateBackground-plugin.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/jquery.animate-shadow-min.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/jquery.scrollTo.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/jquery.nav.min.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/cufon-yui.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/voxBOX_400.font.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/gbin1.js"></script>
+	<script type="text/javascript" src="__APP__/Public/js/fixie.js"></script>
+		
+</head>
+<body>
+    <!--header开始-->
+    <div id="header" class="header">
+		<div style="width:60%;">
+			<div class="publicleft">
+				<a href="/" class="logo"></a>
+			</div>
+			<div class="publicleft" style="margin-top:10px;text-align:center;">
+				<h1 style="margin:0 auto;font-family: 'frscript'; font-size:40px;font-weight:300;">Ose</h1>
+				<h1 style="font-family: 'frscript'; font-size:30px;font-weight:400;">Offrez un Sourire Eternel</h1>
+			</div>
+		</div>
+
+		<div class="pse_search">
+			<form name="template_search" id="template_search" action="/Public/searchUser" method="get" class="pse_search_form"> 
+				<div class="pse_search_div">
+					<input id="q" name="q" type="text" maxlength="250" class="pse_search_input" value="Nom ou Prénom" onfocus="this.value=''" />
+					<div style="float: left; width: 18px; height: 24px; margin-left: 8px;">
+						<a onclick="document.forms['template_search'].submit();" href="#" >
+							<img name="search_button" id="search_button" src="__APP__/Public/images/spacer.gif" border="0" width="18" height="24">
+						</a>
+					</div>
+				</div>
+			</form>
+			
+		</div>
+		<div>
+			<if condition="isset($_SESSION[C('AGENCY_AUTH_KEY')])">
+				<div class="compte">
+					<a href="/Public/Logout" style="float:right; margin-left:10px;">Se déconnecter</a>
+					<a class="compteLink"  href="/Agency/index">Bienvenue {$_SESSION['agencyname']}</a>
+				</div>
+			<elseif condition="isset($_SESSION[C('USER_AUTH_KEY')]) "/>
+				<div class="compte">
+					<a href="/Public/Logout" style="float:right; margin-left:10px;">Se déconnecter</a>
+					<a class="compteLink"  href="/Users/login">Bienvenue {$_SESSION['clientname']}</a>
+				</div>
+			<else />
+				<a class="compte compteLink" href="/Agency/login">Espace Agence</a>
+				<a class="compte compteLink" style="margin-right:140px;" href="/Users/login">Espace Famille</a>
+			</if>
+		</div>
+		<!--
+		<if condition="isset($_SESSION[C('AGENCY_AUTH_KEY')])">
+			<h3 class="headerInfo">Welcome </h3>
+		</if>
+		-->
+		<!-- <a class="compte" href="/Agency/login">Espace Agence</a> -->
+        <!-- <span style="float:right;margin-top: 26px;"><a href="/Public/searchUser">Search</a><br />{:L('header_tag2')}</span>  -->
+    </div>
+    <!--header结束-->

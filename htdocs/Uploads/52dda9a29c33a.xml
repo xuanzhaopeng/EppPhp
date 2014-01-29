@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="1">
+		<struct>
+			<and abstract="true" mandatory="true" name="EclipsePlusPlus">
+				<alt abstract="true" mandatory="true" name="Base">
+					<feature mandatory="true" name="Kelper"/>
+					<feature mandatory="true" name="Luna"/>
+					<feature mandatory="true" name="Indigo"/>
+				</alt>
+				<and abstract="true" name="Modeling">
+					<and abstract="true" name="EMF">
+						<feature mandatory="true" name="Core"/>
+						<feature name="CDO"/>
+						<feature name="Compare"/>
+						<feature name="ModelQuery"/>
+						<feature name="ModelQuery2"/>
+						<feature name="ModelTransaction"/>
+						<feature name="Net4j"/>
+						<feature name="SDO"/>
+						<feature name="Teneo"/>
+						<feature name="ValidationFramework"/>
+					</and>
+				</and>
+				<and abstract="true" name="GEF">
+					<feature name="Zest"/>
+					<feature name="GEF_SDK"/>
+					<feature name="GEF_Example"/>
+				</and>
+				<and abstract="true" name="Team">
+					<and abstract="true" name="SVN">
+						<feature name="SVN_TeamProvider"/>
+						<feature name="SVN_mylyn"/>
+						<feature name="SVN_JDTIgnore"/>
+						<feature name="SVN_TeamProviderPosition"/>
+					</and>
+					<and abstract="true" name="GIT">
+						<feature name="TeamProvider"/>
+						<feature name="JavaImplementation"/>
+						<feature name="JavaImplementation_Java7"/>
+						<feature name="CommentLineInterface_JavaImplementation"/>
+					</and>
+				</and>
+				<and abstract="true" name="GMP">
+					<feature name="GMF_NotationSDK"/>
+					<feature name="GMF_Runtime"/>
+					<feature name="GMF_RuntimeSDK"/>
+					<feature name="GMF_Tooling"/>
+					<feature name="GMF_ToolingRuntimeExtension"/>
+					<feature name="GMF_ToolingSDK"/>
+				</and>
+			</and>
+		</struct>
+		<constraints>
+			<rule>
+				<imp>
+					<var>CDO</var>
+					<var>Net4j</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>GEF_Example</var>
+					<var>GEF_SDK</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>SVN_mylyn</var>
+					<var>SVN_TeamProvider</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>CommentLineInterface_JavaImplementation</var>
+					<var>JavaImplementation</var>
+				</imp>
+			</rule>
+		</constraints>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>

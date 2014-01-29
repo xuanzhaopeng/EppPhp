@@ -1,0 +1,264 @@
+<include file='Public:header' />
+    
+    <div class="wrapper">
+        <div class="mainindex">
+			<div class="publicleft" style="width:70%">
+				<section class="pe-container">
+					<ul id="pe-thumbs" class="pe-thumbs">
+						<li><a href="/PLorisse"><img src="__APP__/Public/animationImages/thumbs/1.jpg" /></a></li>
+						<li><a href="/PLorisse"><img src="__APP__/Public/animationImages/thumbs/2.jpg" /></a></li>
+						<li><a href="/PLorisse"><img src="__APP__/Public/animationImages/thumbs/3.jpg" /></a></li>
+						<li><a href="/PLorisse"><img src="__APP__/Public/animationImages/thumbs/4.jpg" /></a></li>
+						<li><a href="/PLorisse"><img src="__APP__/Public/animationImages/thumbs/5.jpg" /></a></li>
+						<li><a href="/PLorisse"><img src="__APP__/Public/animationImages/thumbs/6.jpg" /></a></li>
+					</ul>
+				</section>
+				
+				<div class="news" id="haha3">
+					<div>
+					<ul style="text-align:center;margin-top:-25px;">
+						<li> 
+							<h1>"Le bonheur ne crée rien que des souvenirs", Balzac</h1>
+						</li>
+						<li>
+							<h1>"La mémoire, ce passé au présent", François Chalais</h1>
+						</li>
+						<li>
+							<h1>"Les larmes sont l'extrême sourire", Stendhal</h1>
+						</li>
+					</ul>
+					</div>
+					<br />
+					<br />
+					<div style="text-align:center;">
+						<ol class="activeOL" style="width:60px;" ></ol>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="publicright" style="margin-top:30px; width:30%">
+				<div class="menuitem button35060" style="float:left;">
+                    <div>
+						<a href="/Public/whoweare">
+							<div class="inner-menu-wrapper"></div><div class="inner-menu-wrapper-inv"></div>
+							<H1>Le Concept</H1>
+						</a>
+						<br />
+                    </div>
+                </div>
+				<br />
+				<br />
+				<br />
+				
+				<br />
+				<div class="menuitem button35060" style="float:left;">
+                    <div>
+						<a href="/Public/createUser">
+							<div class="inner-menu-wrapper"></div><div class="inner-menu-wrapper-inv"></div>
+							<div style="margin:0 auto;text-align:center;">
+								<H1 style=" margin:0 auto;">Offrir un Sourire Eternel</H1>
+							</div>
+						</a>
+						
+						<br />
+                    </div>
+                </div>
+			</div>
+        </div>
+    </div>
+	
+	<script>
+function scrollNews(selector,Entry,time,StartIndex)
+{
+	var _self=this;
+	this.Selector=selector;
+	this.Entry=Entry;
+	this.time = time;
+	this.i=StartIndex||0;
+	this.Count=$(this.Selector+" ul li").length;
+	$(this.Selector+" ul li").hide();//全部隐藏
+	$(this.Selector+" ul li").eq(this.i).show();//第i个显示
+	$(this.Selector).bind("mouseenter",function(){
+	    	if(_self.sI){clearInterval(_self.sI);}
+	}).bind("mouseleave",function(){
+			_self.showIndex(_self.i++);
+	})
+	/*生成激活OL项目*/
+	for(var j=0;j<this.Count;j++)
+		$(this.Selector+" .activeOL").append('<li><a onclick="'+this.Entry+'.showIndex('+j+');" ><img src="__APP__/Public/images/crystal.gif"></a></li>');
+	$(this.Selector+" ol li a").eq(this.i).addClass("active");
+	this.sI=setInterval(this.Entry+".showIndex(null)",this.time);
+	
+	this.GetSelector=function(){return this.Selector;}
+	this.showIndex=function(index)
+	{
+		this.i++;//显示下一个
+		if(this.sI){clearInterval(this.sI);}
+		this.sI=setInterval(this.Entry+".showIndex()",this.time);
+		if (index!=null)
+		{
+			this.i=index;
+		}
+		if(this.i==this.Count)
+			this.i=0;
+		$(this.Selector+" ul li").hide();
+		$(this.Selector+" ul li").eq(this.i).slideDown();
+		$(this.Selector+" ol li a").removeClass("active");
+		$(this.Selector+" ol li a").eq(this.i).addClass("active");
+	}
+}
+var haha3=new scrollNews("#haha3","haha3"  , 5000 , 1);
+</script>
+
+	
+	<script type="text/javascript">
+			$(function() {
+				
+				var Photo	= (function() {
+					
+					var $list		= $('#pe-thumbs'),
+						listW		= $list.width(),
+						listL		= $list.offset().left,
+						$elems		= $list.find('img'),
+						$descrp		= $list.find('div.pe-description'),
+						settings	= {
+							maxScale	: 0.9,
+							maxOpacity	: 0.9,
+							minOpacity	: Number( $elems.css('opacity') )
+						},
+						init		= function() {
+							
+							settings.minScale = _getScaleVal();
+							_loadImages( function() {
+								
+								_calcDescrp();
+								_initEvents();
+							
+							});
+						
+						},
+						// Get Value of CSS Scale through JavaScript:
+						// http://css-tricks.com/get-value-of-css-rotation-through-javascript/
+						_getScaleVal= function() {
+						
+							var st = window.getComputedStyle($elems.get(0), null),
+								tr = st.getPropertyValue("-webkit-transform") ||
+									 st.getPropertyValue("-moz-transform") ||
+									 st.getPropertyValue("-ms-transform") ||
+									 st.getPropertyValue("-o-transform") ||
+									 st.getPropertyValue("transform") ||
+									 "fail...";
+
+							if( tr !== 'none' ) {	 
+
+								var values = tr.split('(')[1].split(')')[0].split(','),
+									a = values[0],
+									b = values[1],
+									c = values[2],
+									d = values[3];
+
+								return Math.sqrt( a * a + b * b );
+							
+							}
+							
+						},
+						_calcDescrp	= function() {
+							
+							$descrp.each( function(i) {
+							
+								var $el		= $(this),
+									$img	= $el.prev(),
+									img_w	= $img.width(),
+									img_h	= $img.height(),
+									img_n_w	= settings.maxScale * img_w,
+									img_n_h	= settings.maxScale * img_h,
+									space_t = ( img_n_h - img_h ) / 2,
+									space_l = ( img_n_w - img_w ) / 2;
+								
+								$el.data( 'space_l', space_l ).css({
+									height	: settings.maxScale * $el.height(),
+									top		: -space_t,
+									left	: img_n_w - space_l
+								});
+							
+							});
+						
+						},
+						_initEvents	= function() {
+						
+							$elems.on('proximity.Photo', { max: 170, throttle: 10, fireOutOfBounds : true }, function(event, proximity, distance) {
+								
+								var $el			= $(this),
+									$li			= $el.closest('li'),
+									$desc		= $el.next(),
+									scaleVal	= proximity * ( settings.maxScale - settings.minScale ) + settings.minScale,
+									scaleExp	= 'scale(' + scaleVal + ')';
+								
+								var $desc		= $el.next();
+								if( scaleVal === settings.maxScale ) {
+									
+									$li.css( 'z-index', 1000 );
+									/*
+									if( $desc.offset().left + $desc.width() > listL + listW ) {
+										
+										$desc.css( 'left', -$desc.width() - $desc.data( 'space_l' ) );
+									
+									}
+									*/
+									$desc.fadeIn( 800 );
+									
+								}	
+								else {
+									
+									$li.css( 'z-index', 1 );
+									
+									$desc.stop(true,true).hide();
+								
+								}	
+								
+								$el.css({
+									'-webkit-transform'	: scaleExp,
+									'-moz-transform'	: scaleExp,
+									'-o-transform'		: scaleExp,
+									'-ms-transform'		: scaleExp,
+									'transform'			: scaleExp,
+									'opacity'			: ( proximity * ( settings.maxOpacity - settings.minOpacity ) + settings.minOpacity )
+								});
+
+							});
+						
+						},
+						_loadImages	= function( callback ) {
+							
+							var loaded 	= 0,
+								total	= $elems.length;
+							
+							$elems.each( function(i) {
+								
+								var $el = $(this);
+								
+								$('<img/>').load( function() {
+									
+									++loaded;
+									if( loaded === total )
+										callback.call();
+									
+								}).attr( 'src', $el.attr('src') );
+							
+							});
+						
+						};
+					
+					return {
+						init	: init
+					};
+				
+				})();
+				
+				Photo.init();
+				
+			});
+		</script>
+<include file='Public:footer' />
+

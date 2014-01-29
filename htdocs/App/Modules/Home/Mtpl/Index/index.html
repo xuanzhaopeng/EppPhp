@@ -1,0 +1,44 @@
+<include file="Public:header" />
+    <div class="wrapper">
+        <div class="mainindex">
+            <div>
+				<br />
+				<div class="userdata" style="text-align:center;">
+					<input type="text" class="userinput" id='sKey' style="margin:0 auto;" Onfocus="this.value='';" /><br /><br/>
+					<input id='btnSearch' type="button" value="Rechercher" class="buttonStyle" style="margin:0 auto;" />
+					<table class="datalist searchlist" id='userList'>
+						<thead id='userListheader'>
+
+						</thead>
+						<tbody id='userListbody'></tbody>
+					</table>
+			 
+				</div>
+			</div>
+
+        </div>
+    </div>
+	
+<script>
+$("#sKey").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#btnSearch").click();
+    }
+});
+
+$(function(){
+	//load has confirmed user list;
+	var type = '1';
+	//searchList();
+	
+	$('#btnSearch').click(function(){
+		var sKey = $('#sKey').val();
+		if(sKey != ''){
+			mobileSearchList(sKey);
+		}
+
+	});
+});
+
+</script>
+<include file="Public:footer" />

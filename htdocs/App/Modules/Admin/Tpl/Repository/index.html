@@ -1,0 +1,169 @@
+<include file="Public:header" />
+<include file="Public:mainNavBar" />
+<include file="Public:sidebar" />
+
+<div id="wrapper" class="wat-cf">
+     <div id="main">
+		<div class="block" id="block-tables">
+			<div class="content">
+	            <h2 class="title">Eclipse Repository Management</h2>
+	            <div class="inner">
+					<div style="display:blcok;">&nbsp;
+						<div style="width:600px;height:40px;float: right;">
+							<div id="name_con_div" style="display:inline-block;">
+								<input type="text" id="searchName" style="width:315px;height:28px;">	
+								<button class="button" onclick="search();" style="float: right;">search</button>
+							</div>
+						</div>
+					</div>   
+					<p></p>
+					<table id="dataTable" class="table">
+	                  <tr>
+	                    <th class="first">URL</th>
+	                  </tr>
+	                  <tbody id='listBody'>
+	                  
+	                  </tbody>
+					</table>
+					<div class="actions-bar wat-cf">
+						<div class="actions">
+							<div id="threaddiv" style="color: red;"></div>
+							<div id="testdiv" style="color: red;"></div>
+						</div>
+	                </div>
+				</div>
+	            <div class="actions-bar wat-cf">
+					<div class="actions">
+						<div id="mvn" style="color: red;"></div>
+	                    <!-- <button class="button" type="submit">
+	                      <img src="../Public/images/icons/cross.png" alt="Delete" />Delete
+	                    </button> -->
+					</div>
+	                <div id="pagination" class="pagination">
+	                    <!-- <span class="disabled prev_page">« Previous</span><span class="current">1</span><a rel="next" href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a href="#">7</a><a href="#">8</a><a href="#">9</a><a href="#">10</a><a href="#">11</a><a rel="next" class="next_page" href="#">Next »</a> -->
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+		<include file="Public:message" />
+	</div>
+</div>
+<script>
+var sessionId = "";
+		$(document).ready(function() {   
+		
+				function shows(){
+                   $.get('http://127.0.0.1:8078/EppServer/RepositoryAjaxServlet', function(responseText) { 
+						$('#threaddiv').text("Currently server runs "+responseText + " threads for updating repository");  
+                    });
+				};
+				
+				function send(){
+					$.ajax({
+						type:"get",
+						url:"http://127.0.0.1:8078/EppServer/testServlet",
+						dataType: "html",
+						timeout: 600000,
+						success:function(data) {
+							$('#testdiv').text(data);  
+						}        
+					});
+				};
+				/*
+				function mvn(){
+                    $.get('http://192.168.1.9:8078/EclipsePlusPlus/MvnServlet', function(responseText) { 
+						sessionId = responseText;
+                    });
+				};
+				function mvnAjax(){
+                   $.get('http://192.168.1.9:8078/EclipsePlusPlus/MvnAjaxServlet?session='+sessionId, function(responseText) { 
+						$('#mvn').append(responseText+"<br \>");  
+                    });
+				};
+				mvn();
+				*/
+				setInterval(function(){shows();}, 2000);
+				//setInterval(function(){mvnAjax();}, 5000);
+         });
+
+var currPageIndex = 1;
+var totalPages = 0;
+var searchCondition = '';
+$(function(){
+	loadPage(1);
+	
+	
+	$('#cbox1').removeAttr('checked');
+	$('#cbox1').click(function(){
+		if ($('#cbox1').attr('checked')) {
+			$("input[type='checkbox']").attr('checked', 'true');			
+		} else {
+			$("input[type='checkbox']").removeAttr('checked');	
+		}
+	});
+	
+});
+
+function loadPage(pageIndex) {
+	currPageIndex = pageIndex;
+	//load data
+	$.post('/Admin/Repository/loadRepositoryPage',{p:pageIndex,sName:searchCondition},function(data){
+		var obj = $.parseJSON(data);
+		if (obj.status == 1) {
+			loadData(obj);
+			hideMessage();
+		} else if(obj.status == 2) {
+			$('#listBody').html('');
+			showMessage(obj.msg, 'warning');
+		} else if (obj.status == 0) {
+			showMessage(obj.msg, 'error');
+		}
+	});
+}
+
+function loadData(obj) {
+	var data = obj.data;
+	var html = '';
+	for(i=0; i<data.length; i++) {
+		html = html + '<tr><td>'+data[i].repository+'</td></tr>';
+	}
+	$('#listBody').html(html);
+	
+	//biuld pagination
+	var pagination = '';
+	var page = obj.page;
+	var nowPage = parseInt(page.nowPage);
+	var prevPage = nowPage - 1;
+	totalPages = page.totalPages;
+	if (prevPage > 0) {
+		pagination = '<span class="disabled prev_page" style="cursor:pointer;" onclick="javascript:loadPage('+prevPage+');">« Prev</span>';	
+	} else {
+		pagination = '<span class="disabled prev_page">« Prev</span>';
+	}
+	
+	for (i=1; i<= page.totalPages; i++) {
+		if (i == nowPage) {
+			pagination = pagination + '<span class="current">'+i+'</span>';
+		} else {
+			pagination = pagination + '<a href="javascript:loadPage('+i+');">'+i+'</a>';					
+		}
+	}
+	var nextPage = nowPage + 1;
+	if (nextPage > page.totalPages) {
+		pagination = pagination + '<span class="next_page">Next »</span>';	
+	} else {
+		pagination = pagination + '<span class="next_page" style="cursor:pointer;" onclick="javascript:loadPage('+nextPage+');">Next »</a></span>';
+	}
+	
+	$('#pagination').html(pagination);
+}
+
+
+
+function search() {
+	searchCondition = $('#searchName').val();
+	loadPage(1);
+}
+</script>
+<include file="Public:footer" />
+          

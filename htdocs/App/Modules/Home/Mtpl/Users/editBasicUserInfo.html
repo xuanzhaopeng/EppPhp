@@ -1,0 +1,145 @@
+<include file='Public:header' />
+
+    <div class="wrapper">
+        <div class="main">
+            <div class="userinformation">
+                <h3>{$Think.lang.basic_info}</h3>
+  				<form id='form1' method="post" action='/Users/doEditBasicUserInfo'>           
+                <input type='hidden' name='uid' value='{$encryptid}' />
+                <table>
+                    <tr>
+                        <td class="tar">*{$Think.lang.account}: &nbsp;&nbsp;</td>
+                        <td><input type="text" class="input02" name='account' value='{$userInfo.account}' readonly="readonly"/></td>
+                    </tr>
+                    <tr>
+                    	<td class="tar">*{$Think.lang.password}: &nbsp;&nbsp;</td>
+                        <td><input type="password" class="input02" name='password' readonly="readonly" value="{$userInfo.password}"/></td>
+                    </tr>
+                    <tr>
+                    	<td class="tar">{$Think.lang.newpwd}: &nbsp;&nbsp;</td>
+                        <td><input type="password" class="input02" name='newpwd' /></td>
+                    </tr>
+                    <tr>
+                        <td class="tar">*{$Think.lang.email}: &nbsp;&nbsp;</td>
+                        <td><input type="text" class="input02" name='email' value='{$userInfo.email}' /></td>
+                    </tr>
+                    <tr>
+                        <td class="tar">{$Think.lang.firstname}: &nbsp;&nbsp;</td>
+                        <td><input type="text" class="input02" name='firstname' value='{$userInfo.firstname}'/></td>
+                    </tr>
+                    <tr>
+                        <td class="tar">{$Think.lang.secondname}: &nbsp;&nbsp;</td>
+                        <td><input type="text" class="input02" name='secondname' value='{$userInfo.secondname}'/></td>
+                    </tr>
+                    <tr>
+                        <td class="tar">{$Think.lang.lastname}: &nbsp;&nbsp;</td>
+                        <td><input type="text" class="input02" name='lastname' value='{$userInfo.lastname}'/></td>
+                    </tr>
+                    <tr>
+                        <td class="tar">{$Think.lang.user_gender}: &nbsp;&nbsp;</td>
+                        <td>
+                            <select name="gender">
+                            	<if condition="$userInfo.gender eq 0" >
+                            		<option value="0" selected='selected'>{$Think.lang.female}</option>
+                            		<option value="1">{$Think.lang.male}</option>
+                            	<else />
+                            		<option value="0">{$Think.lang.female}</option>
+                            		<option value="1" selected='selected'>{$Think.lang.male}</option>
+                            	</if>
+							</select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tar">{$Think.lang.birthday}: &nbsp;&nbsp;</td>
+                        <td><input id='birthday' name='birthday' value='{$userInfo.birthday}' readonly="readonly"  type="text" class='input02'/></td>
+                    </tr>
+                    <tr>
+                        <td class="tar">{$Think.lang.deathday}: &nbsp;&nbsp;</td>
+                        <td><input id='deathday' name='deathday' value='{$userInfo.deathday}' readonly='readonly' type="text" class="input02" /></td>
+                    </tr>
+                    <tr>
+                        <td class="tar">{$Think.lang.avatar}: &nbsp;&nbsp;</td>
+                        <td><if condition="$imgName neq '' " >
+                        		<div id="avatarImageDiv" style="width:200px;height:200px;background:#F1F1F1 url({$imgName}) no-repeat;"></div>
+                        		<input id="hidAvatar" name="hidAvatar" type="hidden" value="{$imgName}" /> 
+                        	<else />
+                        		<input id="hidAvatar" name="hidAvatar" type="hidden" value="{$userInfo.avatar}" /> 
+                        		<div id="avatarImageDiv" style="width:200px;height:200px;background:#F1F1F1 url({$userInfo.avatar}) no-repeat;"></div>
+                        	</if>
+                        	<a href="/Users/uploadAvatar?uid={$encryptid}&imgName={$imgName}">[{$Think.lang.upload_avatar}]</a>
+                        	<span>{$Think.lang.avatar_max_size}</span>
+                        	
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="tar">{$Think.lang.twodimcode}: &nbsp;&nbsp;</td>
+                        <td>
+                            <div id="twodimcodeDiv" style="width:100px;height:100px;background:#F1F1F1 url({$userInfo.twodimcode}) no-repeat;"></div>
+                        	<input id="btnCreateDim" type="button" value="{$Think.lang.createDimcode}" onclick="createTwoDimCode({$userInfo.uid});"/>
+                        	<input id="twodimcode" name="twodimcode" type="hidden" value="{$userInfo.twodimcode}"/> 
+                        </td>
+                    </tr>
+                    
+                    <tr class='relation'>
+                        <td class="tar">{$Think.lang.relationship}: &nbsp;&nbsp;</td>
+                        <td>
+                       		<if condition="$userInfo.relationship eq 1" >
+                       			<input name="relationship" type="checkbox" value="1" checked="checked"/>{$Think.lang.family}
+								<input name="relationship" type="checkbox" value="2"/>{$Think.lang.friend}
+                       		<else />
+                       			<input name="relationship" type="checkbox" value="1"/>{$Think.lang.family}
+								<input name="relationship" type="checkbox" value="2" checked="checked"/>{$Think.lang.friend}
+                       		</if> 
+						</td>
+                    </tr>
+                    <tr class='chkvisiable'>
+                        <td class="tar">{$Think.lang.access_auth}: &nbsp;&nbsp;</td>
+                        <td>
+
+                       		<if condition="$userInfo.visiable eq 0 " ><!--
+                       			<input id="chkboxPrivate" name="visiable" type="checkbox" value="0" checked="checked"/>{$Think.lang.auth_private}
+								--><input id="chkboxSemiPublic" name="visiable" type="checkbox" value="1"/>{$Think.lang.auth_semi_public}
+								<input id="chkboxPublic" name="visiable" type="checkbox"  value="2"/>{$Think.lang.auth_public}	
+                       		<elseif condition="$userInfo.visiable eq 1" /><!--
+								<input id="chkboxPrivate" name="visiable" type="checkbox" value="0"/>{$Think.lang.auth_private}
+								--><input id="chkboxSemiPublic" name="visiable" type="checkbox" value="1" checked="checked"/>{$Think.lang.auth_semi_public}
+								<input id="chkboxPublic" name="visiable" type="checkbox"  value="2"/>{$Think.lang.auth_public}
+							<else /><!--
+								<input id="chkboxPrivate" name="visiable" type="checkbox" value="0"/>{$Think.lang.auth_private}
+								--><input id="chkboxSemiPublic" name="visiable" type="checkbox" value="1"/>{$Think.lang.auth_semi_public}
+								<input id="chkboxPublic" name="visiable" type="checkbox"  value="2" checked="checked" />{$Think.lang.auth_public}
+							</if>                        		
+
+                        </td>
+                    </tr>
+                    <tr id='accesspwdTr'>
+                        <td class="tar">{$Think.lang.access_pwd}: &nbsp;&nbsp;</td>
+                        <td><input id="accesspwd" type="password" class="input02" name="accesspwd" value='{$userInfo.accesspwd}'/></td>
+                    </tr>
+                    <tr id='pwdhintTr'>
+                        <td class="tar">{$Think.lang.pwd_hint}: &nbsp;&nbsp;</td>
+                        <td><input id="pwdhint" type="text" class="input02" name="pwdhint" value='{$userInfo.pwdhint}'/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="tac">
+                           	<a href="javascript:$('#form1').submit();" class="contactbtn">{$Think.lang.submit}</a>
+							<a href="javascript:goback('/Users/userProfile?uid={$encryptid}');" class="contactbtn">{$Think.lang.goback}</a>
+                        </td>
+                    </tr>
+                </table>
+            	</form>
+            	<div id="dialog-set-avatar" style="display: none;">
+	            	<script>
+						var thumbPrefix = 'avatar_w200_w200_';
+						var thumbW = 200;
+						var thumbH = 200;
+					</script>
+				    <include file="Public:uploadImg" />
+				</div>
+            
+            </div>
+        </div>
+    </div>
+
+<include file='Public:footer' />

@@ -1,0 +1,53 @@
+﻿<include file="Public:header" />
+    <div class="wrapper">
+        <div class="main">
+            <script type="text/javascript" src="/Public/js/ajaxFileUpload.js"></script>
+
+<div>
+	<input type="file" id="aFile" name="aFile" onchange="uploadImg();"/>
+	<if condition="$imgName neq '' " >
+		<div id="imgThumbDiv" style="width:200px;height: 200px;background:#F1F1F1 url({$imgName}) no-repeat;"></div>
+		<input type="hidden" value='{$imgName}' id='imgName'/>
+	<else />
+		<div id="imgThumbDiv" style="width:200px;height: 200px;background:#F1F1F1;"></div>
+		<input type="hidden" value='{$imgName}' id='imgName'/>
+	</if>
+	
+	<a href="javascript:ok();">{$Think.lang.ok}</a>
+	
+</div>
+<script>
+	var imgName = "";
+
+	function uploadImg() {
+		var thumbPrefix = 'avatar_w200_w200_';
+		$.ajaxFileUpload({
+            url: '/Public/uploadImg',
+            secureuri: false,
+            fileElementId: 'aFile',
+            data:{prefix:thumbPrefix,thumbW:200,thumbH:200},
+            type:'json',
+            success: function(data){
+            	var obj = $.parseJSON(data);
+            	if (obj.status == 1) {
+            		imgName = "__ROOT__/Uploads/" + thumbPrefix + obj.imgName;
+            		$('#imgThumbDiv').css('background', "url("+imgName+") no-repeat");
+            		$('#imgName').val(imgName);
+            	} else {
+            		alert(obj.msg);	
+            	}
+            },
+            error: function () {
+                alert("{$Think.lang.upload_failed}");
+            }
+        });
+	}
+	function ok() {
+		var imgName = $('#imgName').val();
+		location.href = '/Users/basicUserInfo?uid={$uid}&imgName='+imgName;
+	}
+</script>
+        </div>
+    </div>
+
+<include file="Public:footer" />

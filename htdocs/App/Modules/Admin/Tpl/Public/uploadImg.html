@@ -1,0 +1,32 @@
+<script type="text/javascript" src="__APP__/Public/js/ajaxFileUpload.js"></script>
+<div>
+	<input type="file" id="aFile" name="aFile" onchange="uploadImg();"/>
+	<div id="imgThumbDiv" style="width:200px;height: 200px;background-color: #F8F3F3"></div>
+	<input type="hidden" id="logo" name="logo" value="" />
+</div>
+<script>
+	var imgName = "";
+	function uploadImg() {
+		$.ajaxFileUpload({
+            url: '/Public/uploadImg',
+            secureuri: false,
+            fileElementId: 'aFile',
+            data:{prefix:thumbPrefix,thumbW:thumbW,thumbH:thumbH},
+            type:'json',
+            success: function(data){
+            	var obj = $.parseJSON(data);
+            	if (obj.status == 1) {
+            		imgName = "__ROOT__/Uploads/" + thumbPrefix + obj.imgName;
+            		$('#imgThumbDiv').css('background', "url("+imgName+") no-repeat");
+            		$('#logo').val(imgName);
+            	} else if(obj.status == 0) {
+            		alert(obj.msg);
+            	}
+            	
+            },
+            error: function () {
+                alert("{$Think.lang.upload_failed}");
+            }
+        });
+	}
+</script>

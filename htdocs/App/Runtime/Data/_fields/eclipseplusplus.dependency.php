@@ -1,0 +1,1 @@
+<?php	return array ( 0 => 'model_id', 1 => 'feature1_id', 2 => 'feature2_id', 3 => 'dependency', '_autoinc' => false, '_pk' => 'feature2_id', '_type' => array ( 'model_id' => 'int(11)', 'feature1_id' => 'varchar(100)', 'feature2_id' => 'varchar(100)', 'dependency' => 'varchar(15)', ), );?>

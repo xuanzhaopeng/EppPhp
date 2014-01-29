@@ -1,0 +1,110 @@
+<script type="text/javascript" src="../Public/js/d3.v2.js"></script>  
+<style>
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 4.5px;
+}
+</style>
+
+<div class="block div_hide" id="groupTreeForm">
+    <div class="content">
+    <h2 class="title">SPL Feature Model Tree</h2>
+		<div class="inner">
+			<div id="viz"></div>
+			<script>
+        			var thumbPrefix = 'logo_w200_w200_';
+        			var thumbW = 200;
+        			var thumbH = 200;
+			</script>
+       </div>
+    </div>
+</div>
+<script type="text/javascript">
+var tree_model_id;
+
+function dia_loadTree() {
+	//load data
+	var treeData = {};
+	$.post('/Admin/Group/getTree',{model:tree_model_id},function(data){
+		var obj = $.parseJSON(data);
+		treeData = obj[0];
+		var vis = d3.select("#viz").append("svg:svg")
+			.attr("width", "2000")
+			.attr("height", "2500")
+			.append("svg:g")
+			.attr("transform", "translate(150, 0)");
+			
+		d3.select("#viz").selectAll("svg text").attr("selected", "false");
+
+		var tree = d3.layout.tree()
+			.size([800,500]);
+
+		var diagonal = d3.svg.diagonal()
+			.projection(function(d) { return [d.y, d.x]; });
+
+		var nodes = tree.nodes(treeData);
+		var link = vis.selectAll("pathlink")
+			.data(tree.links(nodes))
+			.enter().append("svg:path")
+			.attr("class", "link")
+			.attr("d", diagonal);
+
+		var node = vis.selectAll("g.node")
+			.data(nodes)
+			.enter().append("svg:g")
+			.attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+
+		node.append("svg:circle")
+			.attr("r", 4.5)
+			.attr("fill",function(n){
+				var status = n.status;
+				if(n.status == 1)
+					return "red";
+				return "black";
+			});
+
+		node.append("svg:text")
+			.attr("dx", function(d) { return d.children ? -8 : 8; })
+			.attr("dy", 3)
+			.attr("id", function(d) { return d.id; })
+			.attr("text-anchor", function(d) { return d.children ? "end" : "start"; })
+			.text(function(d) { return d.name; })
+			.style("cursor", "hand")
+			.on("click", function(d) { 
+				var selectId = d.id;
+				$.post('/Admin/Group/getDependency',{model:tree_model_id,group:selectId},function(dependency){
+					var dp = $.parseJSON(dependency);
+					//d3.select("#viz").selectAll("svg text").style("fill", "black");
+					//d3.select("#viz").selectAll("svg text").attr("selected", "false");
+					if(dp != null){
+						for(j = 0; j<dp.length;j++){
+							var id = dp[j].id;
+							d3.select("#" + id).style("fill", "red"); 
+							d3.select("#" + id).attr("selected", "true"); 
+						}
+					}
+					d3.select("#" + d.id).style("fill", "red"); 
+					d3.select("#" + d.id).attr("selected", "true"); 
+				});
+			});
+	});
+
+}
+
+function openTreeDialog(model_id) {
+  $('#groupTreeForm').dialog({
+		   width: 1000,
+		   height:600,
+           modal: true,
+           title: 'SPL Tree',
+           create: function () { },
+           open: function () { },
+           close: function () { }
+	});
+	tree_model_id = model_id;
+	$('#viz').html("");
+	dia_loadTree();
+}
+
+</script>        

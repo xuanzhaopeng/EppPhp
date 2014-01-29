@@ -1,0 +1,102 @@
+﻿<include file='Public:header' />
+ <div class="container02">
+    <div class="main">
+        <div class="publicleft" style="margin-top: 30px;">
+			<!--LOGIN FORM-->
+				<div name="login-form" class="login-form" >
+					<!--HEADER-->
+						<div class="loginheader">
+							<h2>{$agency.name}</h2>
+				<!--TITLE--><if condition="$agency.logo neq '' ">
+								<a href="#"><img src="{$agency.logo}" /></a>
+							<else />
+								<a href="#"><img src="__APP__/Public/images/test01.jpg" /></a>
+							</if><!--END TITLE-->
+						</div>
+					<!--END HEADER-->
+    
+					<!--FOOTER-->
+					<div class="footer">
+						<div class="usercenter" style="text-align:left;">
+							<table>
+								<tr>
+									<td style="width:100px;">Adresse email : </td>
+									<td>{$agency.email}</td>
+								</tr>
+								<tr>
+									<td valign="top">Adresse postale : </td>
+									<td>{$agency.road_name}</td>
+								</tr>
+								<tr>
+									<td>Ville : </td>
+									<td>{$agency.city}</td>
+								<tr/>
+								<tr>
+									<td>Code Postal : </td>
+									<td>{$agency.postcode}</td>
+								</tr>
+								<tr>
+									<td>Téléphone : </td>
+									<td>{$agency.phone}</td>
+								</tr>
+							</table>
+							<div style="text-align:center;">
+								<a style="margin:0 auto;" href="/Agency/editAgency?id={$agencyid}">【Modifier mes informations】</a>
+							</div>
+							<br />
+						</div>
+				   </div>
+					<!--END FOOTER-->
+				</div>
+				<!--END LOGIN FORM-->
+        </div>
+
+		<div class="publicright tac" style="margin-top:15px;width:65%;">
+        <br />
+			 <div class="userdata">
+			 	 <span style='float: left; width:100px;'>{:L('firstname')}:</span><input type="text" class="userinput" id='sfName' style="float: left;" /><br /><br/>
+			 	 <span style='float: left; width:100px;'>{:L('lastname')}:</span><input type="text" class="userinput" id='slName' style="float: left;"/><br /><br/>
+			 	 <span style='float: left; width:100px;'>{:L('email')}:</span><input type="text" class="userinput" id='sEmail' style="float: none;"/><br /><br/>
+                 <input class="buttonStyle" id='btnSearch' type="button" value="Rechercher"  />
+			 	
+			 	<table class="datalist">
+	                <thead>
+	                    <td>{$Think.lang.firstname}</td>
+	                    <td>{$Think.lang.lastname}</td>
+	                    <td>{:L('email')}</td>
+	                    <td>{$Think.lang.regist_datetime}</td>
+	                </thead>
+                   <tbody id='userListbody' class='userListbody'></tbody>
+              </table>
+				<div id="pagination" class="pagination">
+	                    <!-- <span class="disabled prev_page">« Previous</span><span class="current">1</span><a rel="next" href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a href="#">7</a><a href="#">8</a><a href="#">9</a><a href="#">10</a><a href="#">11</a><a rel="next" class="next_page" href="#">Next »</a> -->
+	            </div>
+			 	<input class="buttonStyle" type="button" value="{$Think.lang.goback}" onclick="goback('/Agency/index');" />
+			 </div>
+		</div>
+	</div>
+</div>
+<script>
+var type = '0';
+$(function(){
+	//load unconfirmed user list;
+	loadUserList(type,1);
+	
+	$('#btnSearch').click(function(){
+		var sfName = $('#sfName').val();
+		var slName = $('#slName').val();
+		var sEmail = $('#sEmail').val();
+		loadUserList(type, 1,sfName, slName, sEmail);
+	});
+});
+
+function loadPage(pageIndex) {
+	var sfName = $('#sfName').val();
+	var slName = $('#slName').val();
+	var sEmail = $('#sEmail').val();
+	loadUserList(type,pageIndex, sfName, slName, sEmail);
+}
+
+</script>
+<include file='Public:footer' />
+

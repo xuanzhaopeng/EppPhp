@@ -1,0 +1,46 @@
+<include file='Public:header' />
+    <div class="container">
+        <div class="main">
+            <div class="left contact">
+                <img src="__APP__/Public/images/logo02.png" />
+                <br />
+                <form id="form1" method="post" action="/Users/checkAccessPwd">
+                <table>
+                	<input type='hidden' name='uid' value='{$uid}' />
+                    <tr>
+                        <td>
+                            {$Think.lang.access_pwd}: &nbsp;&nbsp;
+                        </td>
+                        <td>
+                            <input name="accesspwd" type="password" class="input" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {$Think.lang.pwd_hint}: &nbsp;&nbsp;
+                        </td>
+                        <td>
+                            <!--  <input name="pwdhint" type="text" class="input" value="{$userInfo.pwdhint}" />-->
+                            <span>{$userInfo.pwdhint}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td colspan="2" style="color: blue;">{$Think.lang.private_user_require_pwd}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="tac">
+                            <br />
+                            <a href="javascript:$('#form1').submit();" class="contactbtn">{$Think.lang.submit}</a>
+                        </td>
+                    </tr>
+                </table>
+                </form>
+            </div>
+            <div class="right desimg">
+                <a href="#"> <img src="__APP__/Public/images/test03.jpg" /></a>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+<include file='Public:footer' />

@@ -1,0 +1,171 @@
+<include file='Public:header' />
+<div class="wrapper">
+    <div class="main">
+        <div class="userinformation">
+            <h3>
+                {$Think.lang.basic_info}</h3>
+            <form id='form1' method="post" action='/Users/doAddBasicUserInfo'>
+            <table>
+            	<tr>
+                    <td class="tar">
+                        *{$Think.lang.account}: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input type="text" class="input02" name='account' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        *{$Think.lang.email}: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input type="text" class="input02" name='email' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        *{$Think.lang.password}: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input type="password" class="input02" name='password' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        {$Think.lang.firstname}: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input type="text" class="input02" name='firstname' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        {$Think.lang.secondname}: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input type="text" class="input02" name='secondname' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        {$Think.lang.lastname}: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input type="text" class="input02" name='lastname' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        {$Think.lang.user_gender}: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <select name="gender">
+                            <option value="0">{$Think.lang.female}</option>
+                            <option value="1" selected='selected'>{$Think.lang.male}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        {$Think.lang.birthday}: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input id='birthday' name='birthday' readonly="readonly" type="text" class='input02' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        {$Think.lang.deathday}: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input id='deathday' name='deathday' readonly='readonly' type="text" class="input02" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tar">
+                        {$Think.lang.avatar}: &nbsp;&nbsp;
+                    </td>
+                    <td><if condition="$imgName neq '' " >
+                        		<div id="avatarImageDiv" style="width:200px;height:200px;background:#F1F1F1 url({$imgName}) no-repeat;"></div>
+                        		<input id="hidAvatar" name="hidAvatar" type="hidden" value="{$imgName}" /> 
+                        	<else />
+                        		<input id="hidAvatar" name="hidAvatar" type="hidden" value="{$userInfo.avatar}" /> 
+                        		<div id="avatarImageDiv" style="width:200px;height:200px;background:#F1F1F1 url({$userInfo.avatar}) no-repeat;"></div>
+                        	</if>
+                        	<a href="/Users/uploadAvatar?uid={$encryptid}&imgName={$imgName}">[{$Think.lang.upload_avatar}]</a>
+                        	<span>{$Think.lang.avatar_max_size}</span>
+                        	
+                        </td>
+                </tr>
+                <tr class='relation'>
+                    <td class="tar">
+                        {$Think.lang.relationship}: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input name="relationship" type="checkbox" checked="checked" value="1" />{$Think.lang.family}
+                        <input name="relationship" type="checkbox" value="2" />{$Think.lang.friend}
+                    </td>
+                </tr>
+                <tr class='chkvisiable'>
+                    <td class="tar">
+                        {$Think.lang.access_auth}: &nbsp;&nbsp;
+                    </td>
+                    <td><!--
+                        <input id="chkboxPrivate" name="visiable" type="checkbox" checked="checked" value="0" />{$Think.lang.auth_private}
+                        --><input id="chkboxSemiPublic" name="visiable" type="checkbox" checked="checked" value="1" />{$Think.lang.auth_semi_public}
+                        <input id="chkboxPublic" name="visiable" type="checkbox" value="2" />{$Think.lang.auth_public}
+                    </td>
+                </tr>
+                <tr id='accesspwdTr'>
+                    <td class="tar">
+                        {$Think.lang.access_pwd}: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input id="accesspwd" type="password" class="input02" name="accesspwd" />
+                    </td>
+                </tr>
+                <tr id='pwdhintTr'>
+                    <td class="tar">
+                        {$Think.lang.pwd_hint}: &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input id="pwdhint" type="text" class="input02" name="pwdhint" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tac">
+                        <a href="javascript:$('#form1').submit();" class="contactbtn">{$Think.lang.submit}</a>
+                        <a href="javascript:goback('/Users/userProfile?uid=');" class="contactbtn">{$Think.lang.goback}</a>
+                    </td>
+                </tr>
+            </table>
+            </form>
+            <div id="dialog-set-avatar" style="display: none;">
+                <script>
+                    var thumbPrefix = 'avatar_w200_w200_';
+                    var thumbW = 200;
+                    var thumbH = 200;
+                </script>
+                <include file="Public:uploadImg" />
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(function(){
+	$('#uploadAvatar').click(function(){
+		var title = $('#uploadAvatar').val();
+		$('#dialog-set-avatar').dialog({
+			width: 600,
+	        height: 420,
+	        modal: true,
+	        title: title,
+	        create: function () { },
+	        open: function () { },
+	        close: function () { }
+		});
+	});	
+});
+
+</script>
+<include file='Public:footer' />

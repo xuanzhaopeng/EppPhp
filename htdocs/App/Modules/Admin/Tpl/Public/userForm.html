@@ -1,0 +1,241 @@
+<div class="block div_hide" id="userForm">
+      <div class="content">
+        <h2 class="title">user Form</h2>
+        <div class="inner">
+          <form id="form1" action="/Admin/Users/doEdit" method="post" class="form">
+            <input type='hidden' id='uid' name='uid'>
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">account</label>
+              </div>
+              <input type="text" class="text_field" id='account' name='account' readonly="readonly"/>
+            </div>
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">email</label>
+              </div>
+              <input type="text" class="text_field" id='email' name='email'/>
+            </div>
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">New Password</label>
+              </div>
+              <input type="password" class="text_field" id='newPassword' name='newPassword' />
+            </div>
+            <div class="group">
+              <label class="label">Firstname</label>
+              <input type="text" class="text_field" id='firstname' name='firstname'/>
+            </div>
+            
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Lastname</label>
+              </div>
+              <input type="text" class="text_field" id='lastname' name='lastname' />
+            </div>
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Secondname</label>
+              </div>
+              <input type="text" class="text_field" id='secondname' name='secondname' />
+            </div>
+
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">gender</label>
+              </div>
+              <select name='gender' id='gender'><option value="0">female</option><option value="1">male</option></select>
+            </div>
+            
+            <script>
+			var thumbPrefix = 'avatar_w200_w200_';
+			var thumbW = 200;
+			var thumbH = 200;
+			</script>
+            <include file="Public:uploadAvatar" />
+            
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Birthday</label>
+              </div>
+              <input type="text" class="text_field" id='birthday' name='birthday' readonly="readonly"/>
+            </div>
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Deathday</label>
+              </div>
+              <input type="text" class="text_field" id='deathday' name='deathday' readonly="readonly"/>
+            </div>
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Dim code</label>
+              </div>
+              <input type="text" class="text_field" id='twodimcode' name='twodimcode'/>
+            </div>
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">visiable</label>
+              </div>
+              <select id="visiable" name="visiable">
+              	<option value="0">private</option>
+              	<option value="1">less open</option>
+              	<option value="2">public</option></select>
+            </div>
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Relationship</label>
+              </div>
+              <select id="relationship" name="relationship">
+              	<option value="1">family</option>
+              	<option value="2">friend</option></select>
+            </div>
+            <!--<div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Access password</label>
+              </div>
+              <input type="password" class="text_field" id='accesspwd' name='accesspwd'/>
+            </div>
+            -->
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">New Visit Password</label>
+              </div>
+              <input type="password" class="text_field" id='newAccessPassword' name='newAccessPassword' />
+            </div>
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Password Hint</label>
+              </div>
+              <input type="text" class="text_field" id='pwdhint' name='pwdhint'/>
+            </div>
+            
+            <div class="group">
+                  <div class="fieldWithErrors">
+                    <label class="label" for="post_title">Paid</label>
+                  </div>
+                  <select id='paid' name='paid'>
+                  	<option value='1'>paid</option>
+                  	<option value='0'>not paid</option>
+                  </select>
+                </div>
+                
+                <div class="group">
+                  <div class="fieldWithErrors">
+                    <label class="label" for="post_title">createdby</label>
+                  </div>
+                  <select id='createdby' name='createdby'>
+                  	<option value='1'>agency</option>
+                  	<option value='2'>user</option>
+                  </select>
+                </div>
+            <div class="group">
+                  <div class="fieldWithErrors">
+                    <label class="label" for="post_title">Confirmed</label>
+                  </div>
+                  <select id='confirmid' name='confirmid'>
+                  	<option value='1'>confirmed</option>
+                  	<option value='0'>unconfirmed</option>
+                  </select>
+                </div>
+                
+                <div class="group">
+                  <div class="fieldWithErrors">
+                    <label class="label" for="post_title">Status</label>
+                  </div>
+                  <select id='statusid' name='statusid'>
+                  	<option value='0'>delete</option>
+                  	<option value='1'>normal</option>
+                  </select>
+                </div>
+                
+                <div class="group navform wat-cf">
+                  <button id="btnEditSave" class="button" type="submit">
+                    <img src="../Public/images/icons/tick.png" alt="Save" /> Save
+                  </button>
+                  <span class="text_button_padding">or</span>
+                  <a class="text_button_padding link_button" href="javascript:cancel();" >Cancel</a>
+                </div>
+            
+         </div>
+      </div>
+      
+</div>
+<script type="text/javascript">
+<!--
+$(function(){
+	//search time
+	$('#birthday').datepicker({
+		'dateFormat' :'yy-mm-dd',
+		changeYear: true,
+		changeMonth: true,
+		yearRange: "1900:2013"
+	});
+	$('#deathday').datepicker({
+		'dateFormat' :'yy-mm-dd',
+		changeYear: true,
+		changeMonth: true,
+		yearRange: "1000:2013"
+	});
+	
+	
+	
+	$('#btnEditSave').click(function(){
+		$('#form1').ajaxSubmit({
+			success:function(data){
+				var obj = $.parseJSON(data);
+				if (obj.status > 0) {
+					alert(obj.msg);
+				} else {
+					cancel();
+					loadPage(currPageIndex);
+				}
+			}
+		});
+		return false;
+	});
+});
+
+function cancel() {
+	$("#userForm").dialog("close");
+}
+
+function openEditDialog(data) {
+	$('#userForm').dialog({
+		width: 700,
+           height: 820,
+           modal: true,
+           title: 'Edit',
+           create: function () { },
+           open: function () { },
+           close: function () { }
+	});
+	setFieldData(data);
+}
+
+function setFieldData(data) {
+	if (data != null) {
+		$('#uid').val(data.uid);
+		$('#account').val(data.account);
+		$('#firstname').val(data.firstname);
+		$('#secondname').val(data.secondname);
+		$('#lastname').val(data.lastname);
+		$('#email').val(data.email);
+		$('#gender').val(data.gender);
+		$('#avatar').val(data.avatar);
+		if (data.avatar != null && data.avatar != '') {
+			$('#imgThumbDiv').css('background', "url("+data.avatar+") no-repeat");	
+		}
+		$('#birthday').val(data.birthday);
+		$('#deathday').val(data.deathday);
+		$('#twodimcode').val(data.twodimcode);
+		$('#visiable').val(data.visiable);
+		$('#relationship').val(data.relationship);
+		$('#pwdhint').val(data.pwdhint);
+		$('#paid').val(data.paid);
+		$('#createdby').val(data.createdby);
+		$('#statusid').val(data.statusid);
+		$('#confirmid').val(data.confirmid);
+	}
+}
+//-->
+</script>        

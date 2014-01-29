@@ -1,0 +1,208 @@
+<div class="block div_hide" id="agencyForm">
+      <div class="content">
+        <h2 class="title">Agency Form</h2>
+        <div class="inner">
+          <form id="form1" action="/Admin/Agency/doEdit" method="post" class="form">
+            <input type='hidden' id='agencyId' name='agencyId'>
+            <div class="group">
+              <label class="label">Email</label>
+              <input type="text" class="text_field" id='email' name='email'/>
+              <span class="description">Ex: xxx@xxx.com</span>
+            </div>
+			
+			<div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Siret</label>
+              </div>
+              <input type="text" class="text_field" id='siret' name='siret'/>
+            </div>
+			
+			<div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Reaseaux</label>
+              </div>
+              <input type="text" class="text_field" id='network' name='network'/>
+            </div>
+            
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Name</label>
+              </div>
+              <input type="text" class="text_field" id='name' name='name' />
+              <span class="description">Ex: a simple text</span>
+            </div>
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">New Password</label>
+              </div>
+              <input type="text" class="text_field" id='newPassword' name='newPassword' />
+            </div>
+			<div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Road name</label>
+              </div>
+              <input type="text" class="text_field" id='road_name' name='road_name'/>
+            </div>
+            <!-- 
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Road number</label>
+              </div>
+              <input type="text" class="text_field" id='road_number' name='road_number'/>
+            </div>
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Road Description</label>
+              </div>
+              <input type="text" class="text_field" id='road_desc' name='road_desc'/>
+            </div>
+             -->
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">City</label>
+              </div>
+              <input type="text" class="text_field" id='city' name='city'/>
+            </div>
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Postcode</label>
+              </div>
+              <input type="text" class="text_field" id='postcode' name='postcode'/>
+            </div>
+            <div class="group">
+              <div class="fieldWithErrors">
+                <label class="label" for="post_title">Phone</label>
+              </div>
+              <input type="text" class="text_field" id='phone' name='phone'/>
+            </div>
+            
+            <div class="group">
+                  <div class="fieldWithErrors">
+                    <label class="label" for="post_title">Confirmed</label>
+                  </div>
+                  <select id='confirmid' name='confirmid'>
+                  	<option value='1'>confirmed</option>
+                  	<option value='0'>unconfirmed</option>
+                  </select>
+                </div>
+                
+                <div class="group">
+                  <div class="fieldWithErrors">
+                    <label class="label" for="post_title">Status</label>
+                  </div>
+                  <select id='statusid' name='statusid'>
+                  	<option value='0'>delete</option>
+                  	<option value='1'>normal</option>
+                  </select>
+                </div>
+            
+            <script>
+			var thumbPrefix = 'logo_w200_w200_';
+			var thumbW = 200;
+			var thumbH = 200;
+			</script>
+            <include file="Public:uploadImg" />
+         </div>
+      </div>
+      
+      <div class="content">  
+          	  <h2 class="title">Contact</h2>    
+              <div class="inner form">
+                <div class="group">
+                  <div class="fieldWithErrors">
+                    <label class="label" for="post_title">Firstname</label>
+                  </div>
+                  <input type="text" class="text_field" id='firstname' name='firstname'/>
+                </div>
+                <div class="group">
+                  <div class="fieldWithErrors">
+                    <label class="label" for="post_title">Lastname</label>
+                  </div>
+                  <input type="text" class="text_field" id='lastname' name='lastname'/>
+                </div>
+                <div class="group">
+                  <div class="fieldWithErrors">
+                    <label class="label" for="post_title">Contact Phone</label>
+                  </div>
+                  <input type="text" class="text_field" id='contactPhone' name='contactPhone'/>
+                </div>
+                <div class="group">
+                  <div class="fieldWithErrors">
+                    <label class="label" for="post_title">Contact Email</label>
+                  </div>
+                  <input type="text" class="text_field" id='contactEmail' name='contactEmail'/>
+                </div>
+                <div class="group navform wat-cf">
+                  <button id="btnEditSave" class="button" type="submit">
+                    <img src="../Public/images/icons/tick.png" alt="Save" /> Save
+                  </button>
+                  <span class="text_button_padding">or</span>
+                  <a class="text_button_padding link_button" href="javascript:cancel();" >Cancel</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+<script type="text/javascript">
+<!--
+$(function(){
+	$('#btnEditSave').click(function(){
+		$('#form1').ajaxSubmit({
+			success:function(data){
+				var obj = $.parseJSON(data);
+				if (obj.status > 0) {
+					alert(obj.msg);
+				} else {
+					cancel();
+					loadPage(currPageIndex);
+				}
+			}
+		});
+		return false;
+	});
+});
+
+function cancel() {
+	$("#agencyForm").dialog("close");
+}
+
+function openEditDialog(data) {
+	$('#agencyForm').dialog({
+		width: 800,
+           height: 620,
+           modal: true,
+           title: 'Edit',
+           create: function () { },
+           open: function () { },
+           close: function () { }
+	});
+	setFieldData(data);
+}
+
+function setFieldData(data) {
+	if (data != null) {
+		$('#agencyId').val(data.id);
+		$('#email').val(data.email);
+		$('#siret').val(data.siret);
+		$('#network').val(data.network);
+		$('#name').val(data.name);
+		$('#phone').val(data.phone);
+		$('#logo').val(data.logo);
+		if (data.logo != null && data.logo != '') {
+			$('#imgThumbDiv').css('background', "url("+data.logo+") no-repeat");	
+		}
+		$('#road_name').val(data.road_name);
+		$('#road_number').val(data.road_number);
+		$('#road_desc').val(data.road_desc);
+		$('#postcode').val(data.postcode);
+		$('#city').val(data.city);
+		$('#firstname').val(data.firstname);
+		$('#lastname').val(data.lastname);
+		$('#contactPhone').val(data.contactPhone);
+		$('#contactEmail').val(data.contactEmail);
+		$('#confirmid').val(data.confirmid);
+		$('#statusid').val(data.statusid);
+	}
+}
+//-->
+</script>        

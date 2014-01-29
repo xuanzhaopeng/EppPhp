@@ -1,0 +1,21 @@
+﻿<include file='Public:header' />
+    <div class="wrapper">
+        <div class="main">
+            <div class="left contact">
+                <h3>{$Think.lang.agency_reg_info}</h3>
+                <br />
+                <form id='form1' name='form1' method="post" action='/Agency/saveInfo'>
+                	<input type="hidden" name="agencyId" value="{$agencyid}" />
+                	<input type="hidden" name="optType" value="edit" />
+                	<include file="Share:agencyInfoTable" />
+                </form>
+            </div>
+            <div class="right desimg">
+                <a href="#">
+                    <img src="__APP__/Public/images/test03.jpg" /></a>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+<include file='Public:footer' />
